@@ -6,9 +6,9 @@
     "description": "Emulates the new accent system from macOS.",
     "version": "1.0.0",
     "icons": {
-        "16": "smallestboifinal.png" ,
-        "48": "48boifinal.png",       
-        "128": "bigboifinal.png"
+        "16": "images/16.png" ,
+        "48": "images/48.png",       
+        "128": "images/128.png"
     },
     
     "background": {
@@ -21,20 +21,21 @@
             "https://*/*"
         ],
         "css": [
-            "cssStyling.css"
+            "css/style.css"
         ],
         "js": [
-            "jquery-3.3.1.min.js",
-            "accentLetters.js",
-            "popUpFinal.js"
+            "js/jquery-3.3.1.min.js",
+            "js/accentLetters.js",
+            "js/main.js",
+            "js/getCaret.js"
         ],
         "run_at": "document_end",
         "persistent": false
     } ],
     "browser_action": {
         "default_title": "Accents",
-        "default_icon": "smallboifinal.png",
-        "default_popup": "popupBetter.html"
+        "default_icon": "images/browserAction.png",
+        "default_popup": "index.html"
     },
 
     "permissions": ["activeTab", "clipboardRead", "clipboardWrite"]

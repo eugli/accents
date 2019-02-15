@@ -1,3 +1,4 @@
+// stores all the accented characters and foreign symbols
 const accentLetters = {
     "a": [
         "&#225", "&#224", "&#226", "&#228", "&#230", "&#229", "&#227", "&#257"
