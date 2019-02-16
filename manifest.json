@@ -4,38 +4,26 @@
     "name": "Accents",
     "author": "Eugene Li and Gaetan Almela",
     "description": "Emulates the new accent system from macOS.",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "icons": {
         "16": "images/16.png" ,
         "48": "images/48.png",       
         "128": "images/128.png"
     },
-    
+
     "background": {
         "page": "background.html",
         "persistent": false
     },
-    "content_scripts": [ {
-        "matches": [
-            "http://*/*",
-            "https://*/*"
-        ],
-        "css": [
-            "css/style.css"
-        ],
-        "js": [
-            "js/jquery-3.3.1.min.js",
-            "js/accentLetters.js",
-            "js/main.js",
-            "js/getCaret.js"
-        ],
-        "run_at": "document_end",
-        "persistent": false
-    } ],
     "browser_action": {
         "default_title": "Accents",
         "default_icon": "images/browserAction.png"
     },
 
-    "permissions": ["activeTab", "clipboardRead", "clipboardWrite"]
+    "permissions": [
+        "activeTab",
+        "tabs", 
+        "clipboardRead", 
+        "clipboardWrite"
+    ]
 }

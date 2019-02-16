@@ -31,3 +31,20 @@ function copyListener(tabId, changeInfo, tab) {
     }
 }
 
+// launches the content scripts
+chrome.browserAction.onClicked.addListener(
+    function executeScripts(tabs) {
+        // FIGURE OUT HOW TO DO THIS
+        // chrome.extension.onUpdated.removeListener(executeScripts());
+
+        chrome.tabs.insertCSS(tabs[0], { file: "css/style.css" }, function() {
+            chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" }, function() {
+                chrome.tabs.executeScript(tabs[0], { file: "js/accentLetters.js" }, function() {
+                    chrome.tabs.executeScript(tabs[0], { file: "js/main.js" }, function() {
+                        chrome.tabs.executeScript(tabs[0], { file: "js/getCaret.js" })
+                    });
+                });
+            });
+        });
+    }
+);

@@ -1,194 +1,189 @@
-/* #TEXTAREA--mirror-div {
-    display: block;
-    margin: none;
-    outline: none;
-} */
-
 .spanSpecialAccents {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 30px;
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    width: 30px !important;
 
-    text-align: center;
+    text-align: center !important;
 } 
 
 .topAccents  {
-    position: relative;
+    position: relative !important;
 
-    display: block;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 1em;
-    margin-top: 1.5px;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 1em !important;
+    margin-top: 1.5px !important;
 
-    color: #007CD3;
+    color: #007CD3 !important;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-size: 24px;
-    font-weight: 500;
-    line-height: normal;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; 
+    font-size: 24px !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
 }
 
 .bottomAccents  {
-    position: relative;
+    position: relative !important;
 
-    display: block;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 0.83em;
-    margin-top: -18px;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0.83em !important;
+    margin-top: -18px !important;
 
     color: #cccccc;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-size: 16px;
-    font-weight: 500;
-    line-height: normal;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; 
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
 }
 
 .buttonClassAccents { 
-    z-index: 2147483647;
+    z-index: 2147483647 !important; 
 
-    display: flex;
-    width: 34.5px;
-    height: 56px;
-    min-width: 0;
-    min-height: 0;
-    padding: 0px 3px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    margin: 0;
+    display: flex !important;
+    box-sizing: border-box !important;
+    width: 34.5px !important;
+    height: 56px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0px 3px !important;
+    border-radius: 5px !important;
+    border: none !important;
+    outline: none !important;
+    margin: 0 !important;
     
-    background-color: transparent;
+    background-color: transparent !important;
 
-    text-transform: none;
-    text-decoration: none;
-    line-height: 1;
-    -webkit-appearance: none;
+    text-transform: none !important;
+    text-decoration: none !important;
+    line-height: 1 !important;
+    -webkit-appearance: none !important;
 
-    cursor: pointer;
-    user-select: none; 
+    cursor: pointer !important;
+    user-select: none !important; 
 }
 
 .buttonClassAccents:hover {
-    outline: none;
+    outline: none !important;
 
-    background: #f4f9ff;
+    background: #f4f9ff !important;
 }
 
 .buttonClassAccents:active {
-    outline: none;
+    outline: none !important;
     
-    background-color: #e4f1ff;
+    background-color: #e4f1ff !important;
 }
 
 .modal-popupAccents {
-    position: absolute;
-    z-index: 2147483647;
+    position: absolute !important;
+    z-index: 2147483647 !important;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: content-box;
-    height: 62.5px;
-    padding: 0px 4px;
-    border: #c1d6ff solid 1.5px;
-    border-radius: 7px;
-    margin: 15px;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: content-box !important;
+    height: 62.5px !important;
+    padding: 0px 4px !important;
+    border: #c1d6ff solid 1.5px !important;
+    border-radius: 7px !important;
+    margin: 15px !important;
 
-    background-color: white;
+    background-color: white !important;
 }
 
 .modal-popupAccents:after {
-    position: absolute;
-    top: 58.5px;
-    z-index: -1;
+    position: absolute !important;
+    top: 58.5px !important;
+    z-index: -1 !important;
 
-    display: block;
-    box-sizing: border-box;
-    width: 10.5px;
-    height: 10.5px;
-    border-right: 1.5px solid #c1d6ff;
-    border-bottom: 1.5px solid #c1d6ff;
-    margin-left: 13px;
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 10.5px !important;
+    height: 10.5px !important;
+    border-right: 1.5px solid #c1d6ff !important;
+    border-bottom: 1.5px solid #c1d6ff !important;
+    margin-left: 13px !important;
 
-    background: white;
+    background: white !important;
 
-    content: '';
+    content: '' !important;
 
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg) !important;
+    -webkit-transform: rotate(45deg) !important;
 }
 
 .modal-popupAccents.changed:after {
-    position: absolute;
-    top: 62px;
-    z-index: -1;
+    position: absolute !important;
+    top: 62px !important;
+    z-index: -1 !important;
 
-    display: block;
-    box-sizing: border-box;
-    width: 10.5px;
-    height: 10.5px;
-    border-right: 1.5px solid #c1d6ff;
-    border-bottom: 1.5px solid #c1d6ff;
-    margin-left: 13px;
-    margin-top: -2px;
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 10.5px !important;
+    height: 10.5px !important;
+    border-right: 1.5px solid #c1d6ff !important;
+    border-bottom: 1.5px solid #c1d6ff !important;
+    margin-left: 13px !important;
+    margin-top: -2px !important;
 
-    background: white;
+    background: white !important;
 
-    content: '';
+    content: '' !important;
 
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg) !important;
+    -webkit-transform: rotate(45deg) !important;
 }
 
 .modal-popupAccents.flipped:after {
-    position: absolute;
-    top: -5.2px;
-    z-index: -1;
+    position: absolute !important;
+    top: -5.2px !important;
+    z-index: -1 !important;
 
-    display: block;
-    box-sizing: border-box;
-    width: 10.5px;
-    height: 10.5px;
-    border-left: 1.5px solid #c1d6ff;
-    border-right: 1.5px solid white;
-    border-bottom: 1.5px solid white;
-    border-top: 1.5px solid #c1d6ff;
-    margin-left: 13px;
-    margin-bottom: 20px;
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 10.5px !important;
+    height: 10.5px !important;
+    border-left: 1.5px solid #c1d6ff !important;
+    border-right: 1.5px solid white !important;
+    border-bottom: 1.5px solid white !important;
+    border-top: 1.5px solid #c1d6ff !important;
+    margin-left: 13px !important;
+    margin-bottom: 20px !important;
 
-    background: white;
+    background: white !important;
 
-    content: '';
+    content: '' !important;
 
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg) !important;
+    -webkit-transform: rotate(45deg) !important;
 }
 
 .modal-popupAccents.changedFlipped:after {
-    position: absolute;
-    top: -3.2px;
-    z-index: -1;
+    position: absolute !important;
+    top: -3.2px !important;
+    z-index: -1 !important;
 
-    display: block;
-    box-sizing: border-box;
-    width: 10.5px;
-    height: 10.5px;
-    border-left: 1.5px solid #c1d6ff;
-    border-right: 1.5px solid white;
-    border-bottom: 1.5px solid white;
-    border-top: 1.5px solid #c1d6ff;
-    margin-left: 13px;
-    margin-bottom: 20px;
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 10.5px !important;
+    height: 10.5px !important;
+    border-left: 1.5px solid #c1d6ff !important;
+    border-right: 1.5px solid white !important;
+    border-bottom: 1.5px solid white !important;
+    border-top: 1.5px solid #c1d6ff !important;
+    margin-left: 13px !important;
+    margin-bottom: 20px !important;
 
-    background: white;
+    background: white !important;
 
-    content: '';
+    content: '' !important;
 
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg) !important;
+    -webkit-transform: rotate(45deg) !important;
 }

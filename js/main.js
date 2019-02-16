@@ -4,14 +4,31 @@
 // to do:
 // CONTENTEDITABLE KMS 
 // GOOGLE DOCS KMS AGAIN 
+// fix icons to make them more smooth, update description with keywords, create better images for promotion, promote it online
+// send email to Spanish websites once functionality for Google Docs and contenteditable are added
 
 // issues:
-// get proper caret positioning MAJOR
 // keydown to work while held (means event key handlers have to happen on keydown, not keyup) ***MAJOR***
 // different sizes on different webpages (compare google and discord)???? MINOR
+// check out what is making it redefine constants MINOR
+// replace with content script solution MINOR
+// "content_scripts": [{
+//     "matches": [
+//         "<all_urls>"
+//     ],
+//     "css": [
+//         "css/style.css"
+//     ],
+//     "js": [
+//         "js/jquery-3.3.1.min.js",
+//         "js/accentLetters.js",
+//         "js/main.js",
+//         "js/getCaret.js"
+//     ],
+//     "run_at": "document_end",
+//     "persistent": false
+// }],
 
-// notes:
-// first publish after all current issues are resolved (w/o functionality for Google Docs and contenteditable)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // stores the characters for shifting modal positions
@@ -89,16 +106,16 @@ function preventInfinity () {
     });
 }
 
-// TODO fix this lol
-function onGoogleDocs() {
-    let iframe = document.getElementsByTagName("iframe")[0];
-    if (iframe) {
-        iframe.contentDocument.addEventListener("keypress", function(evt) {
-            // in here call our even functions
-            console.log('clicky boi: ', evt);
-        }, false)
-    }
-}
+// // TODO fix this lol
+// function onGoogleDocs() {
+//     let iframe = document.getElementsByTagName("iframe")[0];
+//     if (iframe) {
+//         iframe.contentDocument.addEventListener("keypress", function(evt) {
+//             // in here call our even functions
+//             console.log('clicky boi: ', evt);
+//         }, false)
+//     }
+// }
 
 // checks when to pop up the modal
 function checkForModal() {
@@ -291,7 +308,7 @@ function clickAndKeyHandler() {
     $(window).one("mousedown", function(e) {
         // if the target is not the modal
         if (e.target.getAttribute("class") !== "buttonClassAccents" && e.target.getAttribute("class") !== "topAccents"
-            && e.target.getAttribute("class") !== "bottomAccents") {
+            && e.target.getAttribute("class") !== "bottomAccents" && e.target.getAttribute("class") !== "spanSpecialAccents") {
             // unbinds the possible events
             $(".columnAccents").unbind("click");
             $(activeelement).unbind("click keydown");
