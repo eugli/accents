@@ -1,17 +1,16 @@
 // to possibly do later: 
 // customization of keys, w/e characters and emojis desired
 
-// to do:
-// CONTENTEDITABLE KMS 
-// GOOGLE DOCS KMS AGAIN 
-// fix icons to make them more smooth, update description with keywords, create better images for promotion, promote it online
-// send email to Spanish websites once functionality for Google Docs and contenteditable are added
-
 // issues:
-// keydown to work while held (means event key handlers have to happen on keydown, not keyup) ***MAJOR***
-// different sizes on different webpages (compare google and discord)???? MINOR
-// check out what is making it redefine constants MINOR
-// replace with content script solution MINOR
+// ******************************YO GAETAN OVER HERE******************************
+// to avoid waiting a few days to publish, i had to change it so that the extension only runs once you press
+// the browser icon in the top right
+// this was done through removing the content script and rather calling the files in the background
+// im really not sure how it still works but the background.html is giving some problems
+// im pretty sure it is calling the scripts multiple times b/c it says im redefining constants in the 
+// background.html log (you can open that on the developer page)
+// it probably just needs to remove the event listeners, but i couldn't figure it out
+// here is the content script part that I removed from the manifest
 // "content_scripts": [{
 //     "matches": [
 //         "<all_urls>"
@@ -28,6 +27,28 @@
 //     "run_at": "document_end",
 //     "persistent": false
 // }],
+
+// next, it would be really awesome if the modal could handle events as soon as it pops up, not when 
+// it detects keyup, as it does right now
+// this is not as simple as just moving where the clickAndKeyHandler() is called b/c it will detect
+// the already held button that was used to pop up the modal before anything else
+// this closes the modal immediately
+
+// for contenteditable things (like comments on Google Classrom and gmail), none it works
+// i believe things need to be changed to use innerHTML instead of value
+// the getCaret and how it works I believe also won't work, but there are Stack Overflow saviors
+// who have gotten it to
+// (to test, you might want to remove const inputs)
+
+// ofc, google docs
+
+// and in terms of the graphics and the publishing,
+// the 128x128 logo is really choppy, i'm not exactly sure how to fix it, maybe you can figure something out
+// the description on the extension page should be injected with as many keywords as possible
+// the promotion images/ screen shots are pretty crappy 
+
+// and my final idea is to once everything is fixed, to send an email to spanish learning websites asking
+// them to maybe post it on the pages where they explain how to write accents
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
