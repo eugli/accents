@@ -34,8 +34,7 @@
     } ],
     "browser_action": {
         "default_title": "Accents",
-        "default_icon": "images/browserAction.png",
-        "default_popup": "index.html"
+        "default_icon": "images/browserAction.png"
     },
 
     "permissions": ["activeTab", "clipboardRead", "clipboardWrite"]

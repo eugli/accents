@@ -20,7 +20,7 @@ const shiftUpALot = /([?!])/g
 const shiftUp = /([""])/g
 
 // stores the allowed elements for the modal
-const inputs = ["input", "select", "button", "textarea", ];
+const inputs = ["input", "select", "button", "textarea"];
 
 // stores the state of whether or not the modal is popped up
 var poppedUp = false;
@@ -54,7 +54,7 @@ var fontSize;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.data) {
         clipboardSaved = request.data;
-        console.log(clipboardSaved);
+        // console.log(clipboardSaved);
     }
 });
 
@@ -62,7 +62,7 @@ $(window).ready(function () {
     preventInfinity();
     checkForModal();
     preventBlur();
-    onGoogleDocs();
+    // onGoogleDocs();
 });
 
 // preserves the text box element in case of blur
@@ -110,13 +110,12 @@ function checkForModal() {
             // pops up the modal if the key is held for the interval
             interval = setTimeout(function() {
                 // if the character has a modal, the document has an active element, and the element is in those allowed to generate a modal
-                // && inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1
-                if (accentLetters[key] != undefined && document.activeElement) {
+                if (accentLetters[key] != undefined && document.activeElement && inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1) {
                     activeelement = document.activeElement;
                     lastFocus = activeelement;
 
                     // logs that the modal has been popped up
-                    console.log("modal successful");
+                    // console.log("modal successful");
 
                     generateModal(accentLetters[key]);
 
@@ -220,7 +219,6 @@ function clickAndKeyHandler() {
     $(activeelement).one("keydown", async function(e) {
         // if the key is in the numbers on the modal
         // remove the modal with executing the character
-        console.log('keydown is getting called!!');
         if (numbers != null && e.keyCode >= 49 && e.keyCode <= 49 + numbers) {
             // helps with preventing the click from doing other things (I think)
             e.preventDefault();
@@ -292,7 +290,6 @@ function clickAndKeyHandler() {
     // separate to preserve the click action for the modal, but the mouse down action for anywhere else
     $(window).one("mousedown", function(e) {
         // if the target is not the modal
-        console.log(e.target.getAttribute("class"))
         if (e.target.getAttribute("class") !== "buttonClassAccents" && e.target.getAttribute("class") !== "topAccents"
             && e.target.getAttribute("class") !== "bottomAccents") {
             // unbinds the possible events
@@ -333,7 +330,7 @@ async function executeAccent() {
     var selectionEnd = lastFocus.selectionEnd;
 
     // logs the character to be placed
-    console.log("character to be placed: " + textToBePasted);
+    // console.log("character to be placed: " + textToBePasted);
 
     // copies the character to the clipboard
     await copyToClipboard(textToBePasted);
