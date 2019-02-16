@@ -85,7 +85,7 @@ function getCaret(element, position) {
     };
 
     // logs the coordinates before adjusting calculations for the modal
-    console.log("coordinates BEFORE: ", coordinates);
+    console.log("coordinates BEFORE: " + coordinates.left + ", " + coordinates.top);
 
     return coordinates;
 }
@@ -116,7 +116,7 @@ function getKeyPosition() {
         + "px";
 
     // logs the position of the focused element
-    console.log($(":focus").position());
+    // console.log($(":focus").position());
 
     // calculates the modal coordinates
     let top = activeelement.offsetTop
@@ -135,7 +135,7 @@ function getKeyPosition() {
         + "px";
 
     // logs the coordinates after adjusting calculations for the modal
-    console.log("coordinates AFTER: " + top + ", " + left);
+    console.log("coordinates AFTER: " + parseInt(top, 10) + ", " + parseInt(left, 10));
 
     // resets regex index
     // shifts characters down slightly for capital letters

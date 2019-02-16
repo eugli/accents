@@ -1,181 +1,194 @@
-#spacingGetter {
-    position: absolute;
-    visibility: hidden;
-    height: auto;
-    width: auto;
-    white-space: nowrap;
-    font-size: 25;
-}
-
-#TEXTAREA--mirror-div {
+/* #TEXTAREA--mirror-div {
     display: block;
     margin: none;
     outline: none;
-}
-
+} */
 
 .spanSpecialAccents {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    text-align: center;
     width: 30px;
+
+    text-align: center;
 } 
 
 .topAccents  {
+    position: relative;
+
     display: block;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 1em;
-    position: relative;
     margin-top: 1.5px;
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-weight: 500;
-    font-stretch: condensed;
+
     color: #007CD3;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-size: 24px;
+    font-weight: 500;
     line-height: normal;
 }
 
 .bottomAccents  {
-    display: block;
     position: relative;
-    margin-bottom: 0.83em;
+
+    display: block;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 0.83em;
     margin-top: -18px;
+
     color: #cccccc;
+
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-weight: 500;
-    display: block;
     font-size: 16px;
+    font-weight: 500;
     line-height: normal;
 }
 
 .buttonClassAccents { 
+    z-index: 2147483647;
+
+    display: flex;
+    width: 34.5px;
+    height: 56px;
     min-width: 0;
     min-height: 0;
-    z-index: 1000000000000000;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    margin: 0;
-    height: 56px;
-    width: 34.5px;
-    cursor: pointer;
-    display: flex;
     padding: 0px 3px;
-    text-transform: none;
     border-radius: 5px;
+    border: none;
+    outline: none;
+    margin: 0;
+    
+    background-color: transparent;
+
+    text-transform: none;
     text-decoration: none;
     line-height: 1;
     -webkit-appearance: none;
-    -moz-appearance: none;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+
+    cursor: pointer;
+    user-select: none; 
 }
 
 .buttonClassAccents:hover {
-    background: #f4f9ff;
     outline: none;
+
+    background: #f4f9ff;
 }
 
 .buttonClassAccents:active {
-    background-color: #e4f1ff;
     outline: none;
+    
+    background-color: #e4f1ff;
 }
 
 .modal-popupAccents {
-    box-sizing: content-box;
-    z-index: 100000000000;
-    padding: 0px 4px;
     position: absolute;
+    z-index: 2147483647;
+
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    box-sizing: content-box;
     height: 62.5px;
-    background-color: white;
+    padding: 0px 4px;
     border: #c1d6ff solid 1.5px;
     border-radius: 7px;
     margin: 15px;
+
+    background-color: white;
 }
 
 .modal-popupAccents:after {
-    box-sizing: content-box;
-    z-index: -1;
-    margin-left: 13px;
-    content: '';
-    display: block;
     position: absolute;
     top: 58.5px;
+    z-index: -1;
+
+    display: block;
+    box-sizing: border-box;
     width: 10.5px;
     height: 10.5px;
-    background: white;
     border-right: 1.5px solid #c1d6ff;
     border-bottom: 1.5px solid #c1d6ff;
-    -webkit-transform:rotate(45deg);
-    box-sizing: border-box;
+    margin-left: 13px;
+
+    background: white;
+
+    content: '';
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
 
 .modal-popupAccents.changed:after {
-    box-sizing: content-box;
-    z-index: -1;
-    margin-left: 13px;
-    margin-top: -2px;
-    content: '';
-    display: block;
     position: absolute;
     top: 62px;
+    z-index: -1;
+
+    display: block;
+    box-sizing: border-box;
     width: 10.5px;
     height: 10.5px;
-    background: white;
     border-right: 1.5px solid #c1d6ff;
     border-bottom: 1.5px solid #c1d6ff;
-    -webkit-transform:rotate(45deg);
-    box-sizing: border-box;
+    margin-left: 13px;
+    margin-top: -2px;
+
+    background: white;
+
+    content: '';
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
 
 .modal-popupAccents.flipped:after {
-    box-sizing: content-box;
-    z-index: -1;
-    margin-left: 13px;
-    margin-bottom: 20px;
-    content: '';
-    display: block;
     position: absolute;
     top: -5.2px;
+    z-index: -1;
+
+    display: block;
+    box-sizing: border-box;
     width: 10.5px;
     height: 10.5px;
-    background: white;
     border-left: 1.5px solid #c1d6ff;
-    border-top: 1.5px solid #c1d6ff;
     border-right: 1.5px solid white;
     border-bottom: 1.5px solid white;
-    -webkit-transform:rotate(45deg);
-    box-sizing: border-box;
+    border-top: 1.5px solid #c1d6ff;
+    margin-left: 13px;
+    margin-bottom: 20px;
+
+    background: white;
+
+    content: '';
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
 
 .modal-popupAccents.changedFlipped:after {
-    box-sizing: content-box;
-    z-index: -1;
-    margin-left: 13px;
-    margin-bottom: 20px;
-    content: '';
-    display: block;
     position: absolute;
     top: -3.2px;
+    z-index: -1;
+
+    display: block;
+    box-sizing: border-box;
     width: 10.5px;
     height: 10.5px;
-    background: white;
     border-left: 1.5px solid #c1d6ff;
-    border-top: 1.5px solid #c1d6ff;
     border-right: 1.5px solid white;
     border-bottom: 1.5px solid white;
-    -webkit-transform:rotate(45deg);
-    box-sizing: border-box;
+    border-top: 1.5px solid #c1d6ff;
+    margin-left: 13px;
+    margin-bottom: 20px;
+
+    background: white;
+
+    content: '';
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }

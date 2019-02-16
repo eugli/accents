@@ -2,16 +2,17 @@
 // customization of keys, w/e characters and emojis desired
 
 // to do:
-// CONTENTEDITABLE KMS AGAIN first
-// GOOGLE DOCS KMS second
+// CONTENTEDITABLE KMS 
+// GOOGLE DOCS KMS AGAIN 
 
 // issues:
 // get proper caret positioning MAJOR
-// prevent input triggering twice MAJOR
-// keydown to work while held MAJOR
-// bigger on google???? MINOR
+// keydown to work while held (means event key handlers have to happen on keydown, not keyup) ***MAJOR***
+// different sizes on different webpages (compare google and discord)???? MINOR
 
-// should publish after all current issues are resolved (w/o functionality for Google Docs and contenteditable)
+// notes:
+// first publish after all current issues are resolved (w/o functionality for Google Docs and contenteditable)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // stores the characters for shifting modal positions
 const shiftDown = /([AEIOUSZNC])/g
@@ -37,7 +38,7 @@ var numbers;
 // if "NOT WORKING" is pasted--guess what--it is not working
 var textToBePasted = "NOT WORKING";
 
-// stores the clipboard data pre-modal
+// stores the pre-modal clipboard data
 var clipboardSaved;
 
 // stores the focused element
@@ -49,7 +50,7 @@ var lastFocus;
 // stores the font size for modal position calculations
 var fontSize;
 
-// saves the clipboard data pre-modal upon receiving the message from the background script
+// saves the pre-modal clipboard data upon receiving the message from the background script
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.data) {
         clipboardSaved = request.data;
@@ -166,151 +167,189 @@ function generateModal(object) {
 
 // handles events that interact with the modal
 function clickAndKeyHandler() {
-    // handles a click on a modal button by executing the accent
+    // handles a click on a modal button by executing the character
     $(".columnAccents").one("click", async function(e) {
-        // prevents the click from clicking away modal immediately
+        // helps with preventing the click from doing other things (I think)
         e.preventDefault();
         e.stopPropagation();
 
-        // ensures text box is focused
+        // refocuses the text box if needed
         if (lastFocus) {
             setTimeout(function() {lastFocus.focus()}, 1);
         }
 
-        // stores the id of the button pressed
+        // gets the text to be pasted from the activated button 
         let id = $(this).children(".buttonClassAccents").attr("id");
+        getText(this);
 
-        // if modal is popped up
+        // if the modal is popped up
+        // executes the placement of the character
         if (poppedUp) {
-            // FIX THIS PART LATER TOO HARD RIGHT NOW MAKE IT A REAL FUNCTION FIX SPACING TOO OK
-            var selectionEnd = lastFocus.selectionEnd;
-
-            getText(this);
-
-            console.log("Text to be pasted:" + textToBePasted);
-            await copyToClipboard(textToBePasted);
-
-            lastFocus.focus();
-            await insertAtCursor(lastFocus, textToBePasted)
-
-            await $(activeelement).val(
-                function(index, value){
-                return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
-            });
-
-            // await document.execCommand("paste");
-            await setCaretPosition(lastFocus, selectionEnd)
-            await copyToClipboard(clipboardSaved);
+            executeAccent();
         }
 
-        // unbinds the other possible events
+        // unbinds the possible events
+        $(".columnAccents").unbind("click");
         $(activeelement).unbind("click keydown");
-        $(window).unbind("resize click blur");
+        $(window).unbind("resize click blur contextmenu");
 
-        // removes the modal with a color change
+        // removes the modal and reverts the color change from the :active selector
         setTimeout(function() {
             $(".modal-popupAccents").remove();
             $("#" + id).css("background-color", "transparent");
 
+            // stores that the modal is no longer popped up
             poppedUp = false;
         }, 25);     
     });
-    
-    // handles a click, resize, or blur on the window by removing the modal without executing the accent
-    $(window).one("click resize", function(e) {
-        // unbinds the other possible events
-        $(".columnAccents").unbind("click");
-        $(activeelement).unbind("keydown click");
 
-        // removes the modal
-        setTimeout(function() {
-            $(".modal-popupAccents").remove();
-
-            poppedUp = false;
-        }, 1);
-    });
-
-    // handles a click on the text box that is not on the modal by removing the modal without executing the accent
-    $(activeelement).one("click", function(e) {
-        // unbinds the other possible events
-        $(".columnAccents").unbind("click");
-        $(window).unbind("resize click blur");
-        $(activeelement).unbind("keydown");
-
-         // removes the modal
-        setTimeout(function() {
-            $(".modal-popupAccents").remove();
-
-            poppedUp = false;
-        }, 1);
-    });
-    // THIS PARTS NEEDS GOD
     // handles a keypress
     $(activeelement).one("keydown", async function(e) {
         // if the key is in the numbers on the modal
-        // remove the modal with executing the accent
+        // remove the modal with executing the character
         if (numbers != null && e.keyCode >= 49 && e.keyCode <= 49 + numbers) {
+            // helps with preventing the click from doing other things (I think)
             e.preventDefault();
             e.stopPropagation();
 
+            // refocuses the text box if needed
             if (lastFocus) {
                 setTimeout(function() {lastFocus.focus()}, 1);
             }
 
+            // gets the text to be pasted from the activated button 
             let id = String.fromCharCode(e.which);
             let button = document.getElementById(id);
+            getText(button);
 
+            // if the modal is popped up
+            // executes the placement of the character
             if (poppedUp) {
-                var selectionEnd = lastFocus.selectionEnd;
-                console.log(selectionEnd)
-                getText(button);
-                console.log("Text to be pasted:" + textToBePasted);
-                await copyToClipboard(textToBePasted);
-                lastFocus.focus();
-                await insertAtCursor(lastFocus, textToBePasted)
-                await $(activeelement).val(
-                            function(index, value){
-                            return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
-                        })
-                // await document.execCommand("paste");
-                await setCaretPosition(lastFocus, selectionEnd);
-                await copyToClipboard(clipboardSaved);
+                executeAccent();
             }
             
+            // changes button background color
             $("#" + id).css("background-color", "#e4f1ff");
 
+            // unbinds the possible events
             $(".columnAccents").unbind("click");
-            $(activeelement).unbind("click");
-            $(window).unbind("resize click blur")
+            $(activeelement).unbind("click keydown");
+            $(window).unbind("resize mousedown blur contextmenu");
 
-           // removes the modal with a color change
+           // removes the modal and reverts the color change
             setTimeout(function() {
                 $(".modal-popupAccents").remove();
                 $("#" + id).css("background-color", "transparent");
 
+                // stores that the modal is no longer popped up
                 poppedUp = false;
             }, 25); 
         }
 
         // if the key is not in the number set
-        // remove the modal
+        // remove the modal without executing the character
         else {
             setTimeout(function() {
                 $(".modal-popupAccents").remove(); 
 
+                // stores that the modal is no longer popped up
                 poppedUp = false;
             }, 1);
         }
     });
+
+    // handles a resize, blur, or right click (contxt menu) on the window by removing the modal without executing the character
+    $(window).one("resize blur contextmenu", function(e) {
+            // unbinds the possible events
+            $(".columnAccents").unbind("click");
+            $(activeelement).unbind("click keydown");
+            $(window).unbind("resize mousedown blur contextmenu");
+
+            // removes the modal
+            setTimeout(function() {
+                $(".modal-popupAccents").remove();
+
+                // stores that the modal is no longer popped up
+                poppedUp = false;
+            }, 1);
+    });
+
+    // handles a mouse down action by removing the modal without executing the character
+    // separate to preserve the click action for the modal, but the mouse down action for anywhere else
+    $(window).one("mousedown", function(e) {
+        // if the target is not the modal
+        console.log(e.target.getAttribute("class"))
+        if (e.target.getAttribute("class") !== "buttonClassAccents" && e.target.getAttribute("class") !== "topAccents"
+            && e.target.getAttribute("class") !== "bottomAccents") {
+            // unbinds the possible events
+            $(".columnAccents").unbind("click");
+            $(activeelement).unbind("click keydown");
+            $(window).unbind("resize mousedown blur contextmenu");
+
+            // removes the modal
+            setTimeout(function() {
+                $(".modal-popupAccents").remove();
+
+                // stores that the modal is no longer popped up
+                poppedUp = false;
+            }, 1);
+        }
+    });
+
+    // handles a click on the text box that is not on the modal by removing the modal without executing the character
+    $(activeelement).one("click", function(e) {
+        // unbinds the possible events
+        $(".columnAccents").unbind("click");
+        $(activeelement).unbind("click keydown");
+        $(window).unbind("resize mousedown blur contextmenu");
+
+        // removes the modal
+        setTimeout(function() {
+            $(".modal-popupAccents").remove();
+
+            // stores that the modal is no longer popped up
+            poppedUp = false;
+        }, 1);
+    });
+}
+
+// executes the placement of the character
+async function executeAccent() {
+    // stores where the character will be placed (the caret position)
+    var selectionEnd = lastFocus.selectionEnd;
+
+    // logs the character to be placed
+    console.log("character to be placed: " + textToBePasted);
+
+    // copies the character to the clipboard
+    await copyToClipboard(textToBePasted);
+
+    // ensures focus on the text box
+    lastFocus.focus();
+
+    // places the character at the caret position
+    await insertAtCursor(lastFocus, textToBePasted)
+
+    // removes the character typed from generating the modal
+    await $(activeelement).val(
+                function(index, value){
+                return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
+            })
+    
+    // alternative to insertAtCursor but only places the character at the end of the text box
+    // await document.execCommand("paste");
+
+    // resets the original caret position from before the character placement
+    await setCaretPosition(lastFocus, selectionEnd);
+
+    // recopies pre-modal clipboard data to preserve it
+    await copyToClipboard(clipboardSaved);
 }
 
 // gets the text to be pasted from the activated button 
 function getText(element) {
     let letter = $(element).find(".topAccents").text();
     let number = $(element).find(".bottomAccents").text();
-
-    // logs the character and number of the button activated
-    console.log(letter, number);
 
     // stores the character as the text to be pasted
     textToBePasted = letter;
