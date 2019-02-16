@@ -20,7 +20,7 @@ const shiftUpALot = /([?!])/g
 const shiftUp = /([""])/g
 
 // stores the allowed elements for the modal
-const inputs = ["input", "select", "button", "textarea"];
+const inputs = ["input", "select", "button", "textarea", ];
 
 // stores the state of whether or not the modal is popped up
 var poppedUp = false;
@@ -62,6 +62,7 @@ $(window).ready(function () {
     preventInfinity();
     checkForModal();
     preventBlur();
+    onGoogleDocs();
 });
 
 // preserves the text box element in case of blur
@@ -88,6 +89,17 @@ function preventInfinity () {
     });
 }
 
+// TODO fix this lol
+function onGoogleDocs() {
+    let iframe = document.getElementsByTagName("iframe")[0];
+    if (iframe) {
+        iframe.contentDocument.addEventListener("keypress", function(evt) {
+            // in here call our even functions
+            console.log('clicky boi: ', evt);
+        }, false)
+    }
+}
+
 // checks when to pop up the modal
 function checkForModal() {
     $(window).on("keypress", function(e) {
@@ -98,7 +110,8 @@ function checkForModal() {
             // pops up the modal if the key is held for the interval
             interval = setTimeout(function() {
                 // if the character has a modal, the document has an active element, and the element is in those allowed to generate a modal
-                if (accentLetters[key] != undefined && document.activeElement && inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1) {
+                // && inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1
+                if (accentLetters[key] != undefined && document.activeElement) {
                     activeelement = document.activeElement;
                     lastFocus = activeelement;
 
@@ -207,6 +220,7 @@ function clickAndKeyHandler() {
     $(activeelement).one("keydown", async function(e) {
         // if the key is in the numbers on the modal
         // remove the modal with executing the character
+        console.log('keydown is getting called!!');
         if (numbers != null && e.keyCode >= 49 && e.keyCode <= 49 + numbers) {
             // helps with preventing the click from doing other things (I think)
             e.preventDefault();

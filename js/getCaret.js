@@ -49,6 +49,7 @@ function getCaret(element, position) {
 
     let style = mirrorDiv.style;
     let computed = getComputedStyle(element);
+    console.log('computed style: ', computed);
 
     style.whiteSpace = "pre-wrap";
     if (element.nodeName !== "INPUT")
@@ -56,9 +57,12 @@ function getCaret(element, position) {
 
     // sets the position of the mirror div
     style.position = "absolute"; 
-    style.top = element.offsetTop + parseInt(computed.borderTopWidth) + "px";
+    // style.top = element.offsetTop + parseInt(computed.borderTopWidth) + "px";
+    style.top = $(':focus').offset().top + 'px'; // this may work on google?
     style.left = "400px";
     style.visibility = "hidden";
+
+    console.log('offset: ', $(':focus').offset().top);
 
     // copies the styling from the text box
     properties.forEach(function (prop) {
@@ -94,6 +98,13 @@ function getCaret(element, position) {
 // styles the modal appropriately (shifts up/down depending character pressed, flips modal if needed)
 function getKeyPosition() {
     activeelement = document.activeElement;
+
+    if ($('.kix-cursor.docs-ui-unprintable') != null) {
+        // this is google docs
+        activeelement = $('.kix-cursor.docs-ui-unprintable');
+    }
+    console.log('active element: ', activeelement.className);
+
     let coordinates = getCaret(activeelement, activeelement.selectionEnd);
     let fontSize = getComputedStyle(activeelement).getPropertyValue("font-size");
 
@@ -105,34 +116,46 @@ function getKeyPosition() {
     rect.style.height = fontSize;
     rect.style.width = "3px";
 
-    rect.style.top = activeelement.offsetTop
-        - activeelement.scrollTop
-        + coordinates.top
-        + "px";
+    // rect.style.top = activeelement.offsetTop
+    //     - activeelement.scrollTop
+    //     + coordinates.top
+    //     + "px";
 
-    rect.style.left = activeelement.offsetLeft
-        - activeelement.scrollLeft
-        + coordinates.left
-        + "px";
+    let top = $(':focus').offset().top + coordinates.top - 91.5;
+    let left = $(':focus').offset().left + coordinates.left - 38.5 - parseInt(fontSize, 10) / 3;
+
+    if ($('.kix-cursor.docs-ui-unprintable') != null) {
+        // this is google docs
+        top = activeelement.offset().top - 91.5;
+        left = activeelement.offset().left + coordinates.left - 38.5 - parseInt(fontSize, 10) / 3;
+    }
+
+    rect.style.top = top - 91.5 + 'px';
+
+    // rect.style.left = activeelement.offsetLeft
+    //     - activeelement.scrollLeft
+    //     + coordinates.left
+    //     + "px";
+    rect.style.left = left + 38.5 + (parseInt(fontSize, 10) / 3) + 'px';
 
     // logs the position of the focused element
     // console.log($(":focus").position());
 
     // calculates the modal coordinates
-    let top = activeelement.offsetTop
-        - activeelement.scrollTop
-        + coordinates.top
-        // + $(":focus").position().top
-        - 91.5
-        + "px";
+    // let top = activeelement.offsetTop
+    //     - activeelement.scrollTop
+    //     + coordinates.top
+    //     // + $(":focus").position().top
+    //     - 91.5
+    //     + "px";
 
-    let left = activeelement.offsetLeft
-        - activeelement.scrollLeft
-        + coordinates.left
-        // + $(":focus").position().top
-        - parseInt(fontSize, 10) / 3
-        - 38.5
-        + "px";
+    // let left = activeelement.offsetLeft
+    //     - activeelement.scrollLeft
+    //     + coordinates.left
+    //     // + $(":focus").position().top
+    //     - parseInt(fontSize, 10) / 3
+    //     - 38.5
+    //     + "px";
 
     // logs the coordinates after adjusting calculations for the modal
     console.log("coordinates AFTER: " + parseInt(top, 10) + ", " + parseInt(left, 10));
