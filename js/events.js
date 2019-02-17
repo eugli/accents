@@ -35,6 +35,12 @@ $(window).on('keypress', event => {
     keyDown = false;
     eventCount = 0;
   }
+
+  if(modalPoppedUp) {
+    console.log('detecting events');
+    detectEvent();
+  }
+    
 });
 
 
