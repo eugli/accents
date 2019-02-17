@@ -1,4 +1,6 @@
 // stores the properties to be copied over from the text box to the mirror div
+console.log('getCaret is getting called');
+
 const properties = [
     "boxSizing",
     "width", 

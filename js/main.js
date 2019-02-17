@@ -97,8 +97,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 $(window).ready(function () {
-    preventInfinity();
-    checkForModal();
+    // preventInfinity();
+    // checkForModal();
     preventBlur();
     // onGoogleDocs();
 });
@@ -111,21 +111,21 @@ function preventBlur() {
 }
 
 // prevents repeating keys upon holding down for characters with a modal
-function preventInfinity () {
-    window.keypressed = {};
+// function preventInfinity () {
+//     window.keypressed = {};
     
-    $(window).keydown(function(e) {
-      if (window.keypressed[e.which] && accentLetters[key] != undefined) {
-        e.preventDefault();
-      } 
+//     $(window).keydown(function(e) {
+//       if (window.keypressed[e.which] && accentLetters[key] != undefined) {
+//         e.preventDefault();
+//       } 
       
-      else {
-        window.keypressed[e.which] = true;
-      }   
-    }).keyup(function(e) {
-      window.keypressed[e.which] = false;
-    });
-}
+//       else {
+//         window.keypressed[e.which] = true;
+//       }   
+//     }).keyup(function(e) {
+//       window.keypressed[e.which] = false;
+//     });
+// }
 
 // // TODO fix this lol
 // function onGoogleDocs() {
@@ -243,7 +243,8 @@ function clickAndKeyHandler() {
         $(activeelement).unbind("click keydown");
         $(window).unbind("resize click blur contextmenu");
 
-        // removes the modal and reverts the color change from the :active selector
+        // removes the modal and reverts the color change 
+        // from the :active selector on the button clicked
         setTimeout(function() {
             $(".modal-popupAccents").remove();
             $("#" + id).css("background-color", "transparent");
@@ -366,6 +367,7 @@ function clickAndKeyHandler() {
 async function executeAccent() {
     // stores where the character will be placed (the caret position)
     var selectionEnd = lastFocus.selectionEnd;
+    console.log('selectionEnd: ', selectionEnd);
 
     // logs the character to be placed
     // console.log("character to be placed: " + textToBePasted);
@@ -407,6 +409,7 @@ function getText(element) {
 // copies the text to the clipboard
 // works through the magic of Stack Overflow, don't ask how
 function copyToClipboard(textToBePasted) {
+    console.log('copyToClipboard');
     const el = document.createElement("textarea"); 
     el.value = textToBePasted;                                 
     el.setAttribute("readonly", "");                

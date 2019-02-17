@@ -1,5 +1,6 @@
 // copies the current clipboard data (pre-modal) and sends it to the content script (in Chrome extensions,
 // only background scripts can access the clipboard) 
+
 function getContentFromClipboard() {
     var result = "";
     var sandbox = document.getElementById("sandbox");
@@ -36,15 +37,16 @@ chrome.browserAction.onClicked.addListener(
     function executeScripts(tabs) {
         // FIGURE OUT HOW TO DO THIS
         // chrome.extension.onUpdated.removeListener(executeScripts());
+        let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/modal.js', 'js/events.js'];
 
-        chrome.tabs.insertCSS(tabs[0], { file: "css/style.css" }, function() {
-            chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" }, function() {
-                chrome.tabs.executeScript(tabs[0], { file: "js/accentLetters.js" }, function() {
-                    chrome.tabs.executeScript(tabs[0], { file: "js/main.js" }, function() {
-                        chrome.tabs.executeScript(tabs[0], { file: "js/getCaret.js" })
-                    });
-                });
-            });
+        // add jquery
+        chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" });
+
+        // add all other scripts
+        scripts.forEach(script => {
+            chrome.tabs.executeScript(tabs[0], { file: script });
         });
+
+        chrome.tabs.insertCSS(tabs[0], { file: "css/style.css" });
     }
 );
