@@ -119,12 +119,18 @@ function getKeyPosition() {
     console.log(key)
 
     // positions the modal for certain keys better
-    if (key == "l" || key == "i" || key == "'") {
+    if (key == "l" || key == "j" || key == "i" || key == "'") {
         left += parseInt(fontSize, 10) / 5;
     }
 
     if (key == '"') {
         left += parseInt(fontSize, 10) / 10;
+    }
+
+    if (key == "g") {
+        $(".bottomAccents").css({
+            "margin-top": "-16px"
+        });
     }
 
     // resets regex index

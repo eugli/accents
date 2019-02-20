@@ -1,6 +1,15 @@
 // to possibly do later: 
 // customization of keys, w/e characters and emojis desired
 
+// TOOK OUT TABS PERMISSION, NEEDED FOR BACKGROUND CALLING
+// delete github
+// buggy on spanishdict.com
+// on click, turn off, then turn on
+// message through the background script
+// html popup that says on
+// on youtube.com, dynamic moving search bar
+// no idea how to fix
+
 // issues:
 // ******************************YO GAETAN OVER HERE******************************
 // to avoid waiting a few days to publish, i had to change it so that the extension only runs once you press
@@ -57,7 +66,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // stores the characters for shifting modal positions
-const shiftDown = /([AEIOUSZNC])/g
+const shiftDown = /([AEIOUSZNCHhGJS])/g
 const shiftUpALot = /([?!])/g
 const shiftUp = /(["'])/g
 // stores the allowed elements for the modal
@@ -165,7 +174,7 @@ function checkForModal() {
                     // stores that the modal has been popped up
                     poppedUp = true;
                 }
-            }, 200);
+            }, 250);
         }
     }).on("keyup", function(e) {
         // resets interval and key if key is not held for the necessary time

@@ -31,6 +31,11 @@ function copyListener(tabId, changeInfo, tab) {
     }
 }
 
+
+// chrome.browserAction.onClicked.addListener(
+//     function 
+// );
+
 // launches the content scripts
 chrome.browserAction.onClicked.addListener(
     function executeScripts(tabs) {

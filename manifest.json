@@ -4,7 +4,7 @@
     "name": "Accents",
     "author": "Eugene Li and Gaetan Almela",
     "description": "Emulates the new accent system from macOS.",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "icons": {
         "16": "images/16.png" ,
         "48": "images/48.png",       
@@ -22,7 +22,6 @@
 
     "permissions": [
         "activeTab",
-        "tabs", 
         "clipboardRead", 
         "clipboardWrite"
     ]
