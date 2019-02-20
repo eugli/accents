@@ -110,11 +110,22 @@ function getKeyPosition() {
     // calculates the modal coordinates
     let top = $(':focus').offset().top 
             + coordinates.top 
-            - 91.5;
+            - 90;
     let left = $(':focus').offset().left
-             + coordinates.left
-             - 38.5
-             - parseInt(fontSize, 10) / 3;
+            + coordinates.left
+            - 38.5
+            - parseInt(fontSize, 10) / 3;
+
+    console.log(key)
+
+    // positions the modal for certain keys better
+    if (key == "l" || key == "i" || key == "'") {
+        left += parseInt(fontSize, 10) / 5;
+    }
+
+    if (key == '"') {
+        left += parseInt(fontSize, 10) / 10;
+    }
 
     // resets regex index
     // shifts characters down slightly for capital letters
@@ -130,7 +141,7 @@ function getKeyPosition() {
         });
 
         $(".modal-popupAccents").css({
-            "height": "64px",
+            "height": "67px",
         });
 
         $(".modal-popupAccents").toggleClass("changed");
@@ -146,11 +157,11 @@ function getKeyPosition() {
     shiftUp.lastIndex = 0;
     if (shiftUp.test(key)) {
         $(".topAccents").css({
-            "margin-top": "-1px"
+            "margin-top": "-2px"
         });
 
         $(".bottomAccents").css({
-            "margin-top": "-18px"
+            "margin-top": "-16px"
         });
     }
 
@@ -183,7 +194,7 @@ function getKeyPosition() {
         else {
             $(".modal-popupAccents").toggleClass("flipped");
             $(".modal-popupAccents").css({
-                "left": left,
+                "left": parseInt(left, 10) + 1 + "px",
                 "top": parseInt(top, 10) + parseInt(fontSize, 10) +  87.5 +  "px"
             });
         }

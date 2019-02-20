@@ -34,6 +34,8 @@
 // the already held button that was used to pop up the modal before anything else
 // this closes the modal immediately
 
+// positioning could use some work, different on different websites
+
 // for contenteditable things (like comments on Google Classrom and gmail), none it works
 // i believe things need to be changed to use innerHTML instead of value
 // the getCaret and how it works I believe also won't work, but there are Stack Overflow saviors
@@ -50,13 +52,14 @@
 // and my final idea is to once everything is fixed, to send an email to spanish learning websites asking
 // them to maybe post it on the pages where they explain how to write accents
 
+// something doesnt work on spanishdict.com
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // stores the characters for shifting modal positions
 const shiftDown = /([AEIOUSZNC])/g
 const shiftUpALot = /([?!])/g
-const shiftUp = /([""])/g
-
+const shiftUp = /(["'])/g
 // stores the allowed elements for the modal
 const inputs = ["input", "select", "button", "textarea"];
 
@@ -162,7 +165,7 @@ function checkForModal() {
                     // stores that the modal has been popped up
                     poppedUp = true;
                 }
-            }, 250);
+            }, 200);
         }
     }).on("keyup", function(e) {
         // resets interval and key if key is not held for the necessary time
@@ -206,7 +209,7 @@ function generateModal(object) {
         });
 
         let element = 
-        `<div class="modal-popupAccents" id="modal-popupAccents">
+        `<div class="modal-popupAccents" id="modal-popupAccents" style:">
             ${columns}
         </div>\n`;
         
@@ -241,12 +244,12 @@ function clickAndKeyHandler() {
         // unbinds the possible events
         $(".columnAccents").unbind("click");
         $(activeelement).unbind("click keydown");
-        $(window).unbind("resize click blur contextmenu");
+        $(window).unbind("resize mousedown scroll blur contextmenu");
 
         // removes the modal and reverts the color change from the :active selector
         setTimeout(function() {
             $(".modal-popupAccents").remove();
-            $("#" + id).css("background-color", "transparent");
+            $("#" + id).css("background-color", "transparent !important");
 
             // stores that the modal is no longer popped up
             poppedUp = false;
@@ -279,17 +282,17 @@ function clickAndKeyHandler() {
             }
             
             // changes button background color
-            $("#" + id).css("background-color", "#e4f1ff");
+            $("#" + id).css("background-color", "#e4f1ff !important");
 
             // unbinds the possible events
             $(".columnAccents").unbind("click");
             $(activeelement).unbind("click keydown");
-            $(window).unbind("resize mousedown blur contextmenu");
+            $(window).unbind("resize mousedown scroll blur contextmenu");
 
            // removes the modal and reverts the color change
             setTimeout(function() {
                 $(".modal-popupAccents").remove();
-                $("#" + id).css("background-color", "transparent");
+                $("#" + id).css("background-color", "transparent !important");
 
                 // stores that the modal is no longer popped up
                 poppedUp = false;
@@ -309,11 +312,11 @@ function clickAndKeyHandler() {
     });
 
     // handles a resize, blur, or right click (contxt menu) on the window by removing the modal without executing the character
-    $(window).one("resize blur contextmenu", function(e) {
+    $(window).one("resize scroll contextmenu", function(e) {
             // unbinds the possible events
             $(".columnAccents").unbind("click");
             $(activeelement).unbind("click keydown");
-            $(window).unbind("resize mousedown blur contextmenu");
+            $(window).unbind("resize mousedown scroll blur contextmenu");
 
             // removes the modal
             setTimeout(function() {
@@ -333,7 +336,7 @@ function clickAndKeyHandler() {
             // unbinds the possible events
             $(".columnAccents").unbind("click");
             $(activeelement).unbind("click keydown");
-            $(window).unbind("resize mousedown blur contextmenu");
+            $(window).unbind("resize mousedown scroll blur contextmenu");
 
             // removes the modal
             setTimeout(function() {
@@ -350,7 +353,7 @@ function clickAndKeyHandler() {
         // unbinds the possible events
         $(".columnAccents").unbind("click");
         $(activeelement).unbind("click keydown");
-        $(window).unbind("resize mousedown blur contextmenu");
+        $(window).unbind("resize mousedown scroll blur contextmenu");
 
         // removes the modal
         setTimeout(function() {
