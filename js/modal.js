@@ -136,14 +136,15 @@ function detectEvent() {
             $(activeelement).unbind("click keydown");
             $(window).unbind("resize mousedown blur contextmenu");
 
-            // removes the modal and reverts the color change
-            setTimeout(() => {
-                $(".modal-popupAccents").remove();
-                $("#" + id).css("background-color", "transparent");
-
-                hide();
-            }, HIDE_MODAL_TIMEOUT);
         }
+
+        // removes the modal and reverts the color change
+        setTimeout(() => {
+            $(".modal-popupAccents").remove();
+            $("#" + id).css("background-color", "transparent");
+
+            hide();
+        }, HIDE_MODAL_TIMEOUT);
     });
 
     // clicking a button

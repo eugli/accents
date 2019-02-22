@@ -14,6 +14,7 @@ function getContentFromClipboard() {
 }
 
 function sendPasteToContentScript(toBePasted) {
+    console.log('text to be pasted: ', toBePasted);
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(
             tabs[0].id,
