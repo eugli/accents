@@ -49,7 +49,7 @@ function copyToClipboard(textToBePasted) {
   document.execCommand("copy");                  
   document.body.removeChild(el);     
 
-  if (selected) {                                 
+  if (selected) {
     document.getSelection().removeAllRanges();   
     document.getSelection().addRange(selected);
   }   
