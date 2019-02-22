@@ -105,70 +105,72 @@ function __setup(letter) {
         ${columns}
     </div>\n`;
 
+    activeElem = document.activeElement;
     $("body").append(element);
 }
 
-function hide() {
+function hide(activeElem) {
     modalPoppedUp = false;
     $('.modal-popupAccents').remove();
+
+    console.log('hiding: ', activeElem);
+    // change focus back to textbox
+    activeElem.focus();
 }
 
-// funtion should only run when the modal is popped up
-// detects any event on the key
-function detectEvent() {
 
-    // keyboard shortcuts
-    $(window).on('keydown', async (event) => {
+$(window).on('keydown', async (event) => {
 
-        // if it is a valid number
-        if (modalNumbers.indexOf(parseInt(event.key)) > -1) {
-            event.preventDefault();
+    // if it is a valid number
+    if (modalNumbers.indexOf(parseInt(event.key)) > -1 && modalPoppedUp) {
+        console.log('activeElement: ', activeElem);
+        event.preventDefault();
 
-            let id = String.fromCharCode(event.which);
-            let button = document.getElementById(id);
-            getText(button);
+        let id = String.fromCharCode(event.which);
+        let button = document.getElementById(id);
+        getText(button);
 
-            executeAccent();
+        executeAccent();
 
-            $("#" + id).css("background-color", "#e4f1ff");
+        $("#" + id).css("background-color", "#e4f1ff");
 
-            $(".columnAccents").unbind("click");
-            $(activeelement).unbind("click keydown");
-            $(window).unbind("resize mousedown blur contextmenu");
-
-        }
+        $(".columnAccents").unbind("click");
+        $(activeelement).unbind("click keydown");
+        $(window).unbind("resize mousedown blur contextmenu");
 
         // removes the modal and reverts the color change
         setTimeout(() => {
             $(".modal-popupAccents").remove();
             $("#" + id).css("background-color", "transparent");
 
-            hide();
+            hide(activeElem);
         }, HIDE_MODAL_TIMEOUT);
-    });
+    }
+});
 
-    // clicking a button
-    $('.buttonClassAccents').one('click', event => {
+// clicking a button
+$('.buttonClassAccents').one('click', event => {
+    if(modalPoppedUp) {
         console.log(event);
 
         let element = $(event.currentTarget);
-
+    
         getText(element);
-
+    
         // executes the placement of the character
         executeAccent();
-
+    
         // unbinds the possible events
         $(".columnAccents").unbind("click");
         $(activeelement).unbind("click keydown");
         $(window).unbind("resize click blur contextmenu");
-
+    
         // removes the modal and reverts the color change 
         // from the :active selector on the button clicked
         setTimeout(() => {
             $(".modal-popupAccents").remove();
-
-            hide();
+    
+            hide(activeElem);
         }, HIDE_MODAL_TIMEOUT);
-    });
-}
+    }
+});

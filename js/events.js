@@ -13,6 +13,7 @@ $(window).ready(function() {
 
 
 let keyPresses = 0, listening = true, awaitingNumberShortcut = false, prevKeyPressed = '';
+let activeElement;
 
 $(window).on('keydown', event => {
   // key of interest
@@ -53,8 +54,6 @@ $(window).on('keydown', event => {
 
 // handles which pag
 function eventHandler(key, numberKey = null) {
-  // console.log('event handler');
-  console.log('calling even handlers: ', key, numberKey);
 
   lastFocus = document.activeElement;
   // if the page is a Google Docs document
