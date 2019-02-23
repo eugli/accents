@@ -7,8 +7,6 @@
 // on click, turn off, then turn on
 // message through the background script
 // html popup that says on
-// on youtube.com, dynamic moving search bar
-// no idea how to fix
 
 // issues:
 // ******************************YO GAETAN OVER HERE******************************
@@ -37,14 +35,6 @@
 //     "persistent": false
 // }],
 
-// next, it would be really awesome if the modal could handle events as soon as it pops up, not when 
-// it detects keyup, as it does right now
-// this is not as simple as just moving where the clickAndKeyHandler() is called b/c it will detect
-// the already held button that was used to pop up the modal before anything else
-// this closes the modal immediately
-
-// positioning could use some work, different on different websites
-
 // for contenteditable things (like comments on Google Classrom and gmail), none it works
 // i believe things need to be changed to use innerHTML instead of value
 // the getCaret and how it works I believe also won't work, but there are Stack Overflow saviors
@@ -71,6 +61,9 @@ const shiftUpALot = /([?!])/g
 const shiftUp = /(["'])/g
 // stores the allowed elements for the modal
 const inputs = ["input", "select", "button", "textarea"];
+
+// stores whether the text box is contenteditable
+var contentEditable = false;
 
 // stores the state of whether or not the modal is popped up
 var poppedUp = false;
@@ -160,19 +153,36 @@ function checkForModal() {
             // pops up the modal if the key is held for the interval
             interval = setTimeout(function() {
                 // if the character has a modal, the document has an active element, and the element is in those allowed to generate a modal
-                if (accentLetters[key] != undefined && document.activeElement && inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1) {
-                    activeelement = document.activeElement;
-                    lastFocus = activeelement;
+                if (accentLetters[key] != undefined && document.activeElement) {
+                    if (inputs.indexOf(document.activeElement.tagName.toLowerCase()) != -1 && document.activeElement.type != "password") {
+                        // stores the text box
+                        activeelement = document.activeElement;
+                        lastFocus = activeelement;
 
-                    // logs that the modal has been popped up
-                    // console.log("modal successful");
+                        // generates the modal
+                        generateModal(accentLetters[key]);
 
-                    generateModal(accentLetters[key]);
+                        // gets the caret position
+                        getKeyPosition();
+    
+                        // stores that the modal has been popped up
+                        poppedUp = true;
+                    }
 
-                    getKeyPosition();
+                    else if (document.activeElement.isContentEditable) {
+                        console.log("content editables")
+                        // stores that the text box is contenteditable
+                        contentEditable = true;
 
-                    // stores that the modal has been popped up
-                    poppedUp = true;
+                        // generates the modal
+                        generateModal(accentLetters[key]);
+
+                        // gets the caret position for contenteditable
+                        getKeyPositionContentEditable();
+
+                        // stores that the modal has been popped up
+                        poppedUp = true;
+                    }
                 }
             }, 250);
         }
@@ -321,7 +331,7 @@ function clickAndKeyHandler() {
     });
 
     // handles a resize, blur, or right click (contxt menu) on the window by removing the modal without executing the character
-    $(window).one("resize scroll contextmenu", function(e) {
+    $(window).one("resize blur scroll contextmenu", function(e) {
             // unbinds the possible events
             $(".columnAccents").unbind("click");
             $(activeelement).unbind("click keydown");
@@ -376,35 +386,52 @@ function clickAndKeyHandler() {
 
 // executes the placement of the character
 async function executeAccent() {
-    // stores where the character will be placed (the caret position)
-    var selectionEnd = lastFocus.selectionEnd;
+    if (!contentEditable) {
+        // ensures focus on the text box
+        lastFocus.focus();
 
-    // logs the character to be placed
-    // console.log("character to be placed: " + textToBePasted);
+        // stores where the character will be placed (the caret position)
+        var selectionEnd = lastFocus.selectionEnd;
 
-    // copies the character to the clipboard
-    await copyToClipboard(textToBePasted);
+        // copies the character to the clipboard
+        await copyToClipboard(textToBePasted);
 
-    // ensures focus on the text box
-    lastFocus.focus();
+        // places the character at the caret position
+        await insertAtCursor(lastFocus, textToBePasted)
 
-    // places the character at the caret position
-    await insertAtCursor(lastFocus, textToBePasted)
-
-    // removes the character typed from generating the modal
-    await $(activeelement).val(
-                function(index, value){
+        // removes the character typed from generating the modal
+        await $(activeelement).val(
+            function(index, value) {
                 return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
-            })
-    
-    // alternative to insertAtCursor but only places the character at the end of the text box
-    // await document.execCommand("paste");
+        })
 
-    // resets the original caret position from before the character placement
-    await setCaretPosition(lastFocus, selectionEnd);
+        // resets the original caret position from before the character placement
+        await setCaretPosition(lastFocus, selectionEnd);
 
-    // recopies pre-modal clipboard data to preserve it
-    await copyToClipboard(clipboardSaved);
+        // recopies pre-modal clipboard data to preserve it
+        await copyToClipboard(clipboardSaved);
+    }
+
+    else {        
+        contentEditable = false;
+
+        lastFocus = activeelement;
+        activeelement.focus();
+
+        // copies the character to the clipboard
+        await copyToClipboard(textToBePasted);
+
+        var text = activeelement.innerText;
+        if (text[text.length - 1] === "\n") {
+            text = text.slice(0, -1);
+        }
+
+        // places the character at the caret position
+        await document.execCommand("paste");
+
+        // recopies pre-modal clipboard data to preserve it
+        await copyToClipboard(clipboardSaved);
+    }
 }
 
 // gets the text to be pasted from the activated button 
@@ -442,7 +469,7 @@ function copyToClipboard(textToBePasted) {
 }
 
 // inserts the text to the desired caret position
-// works through the magic of Stack Overflow, don't ask how
+// works through the magic of Stack Ovepasterflow, don't ask how
 function insertAtCursor(myField, myValue) {
     // if IE
     if (document.selection) {
