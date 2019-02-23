@@ -1,84 +1,114 @@
 const accentLetters = {
     "a": [
-        "&#225", "&#224", "&#226", "&#228", "&#230", "&#229", "&#227", "&#257"
+        "á", "à", "â", "ä", "æ", "å", "ã", "ā"
     ],
     "A": [
-        "&#193", "&#192", "&#194", "&#196", "&#198", "&#197", "&#195", "&#256"
+        "Á", "À", "Â", "Ä", "Æ", "Å", "Ã", "Ā"
     ],
     "e": [
-        "&#233", "&#232", "&#234", "&#235", "&#281", "&#275", "&#279"
+        "é", "è", "ê", "ë", "ę", "ē", "ė"
     ],
     "E": [
-        "&#201", "&#200", "&#202", "&#203", "&#280", "&#274", "&#278"
+        "É", "È", "Ê", "Ë", "Ę", "Ē", "Ė"
     ],
     "i": [
-        "&#237", "&#236", "&#238", "&#239", "&#303", "&#299"
+        "í", "ì", "î", "ï", "į", "ī"
     ],
     "I": [
-        "&#205", "&#204", "&#206", "&#207", "&#302", "&#298"
+        "Í", "Ì", "Î", "Ï", "Į", "Ī"
     ],
     "o": [
-        "&#243", "&#242", "&#244", "&#246", "&#339", "&#248", "&#245", "&#333"
+        "ó", "ò", "ô", "ö", "ő", "œ", "ø", "õ", "ō"
     ],
     "O": [
-        "&#211", "&#210", "&#212", "&#214", "&#338", "&#216", "&#213", "&#332"
+        "Ó", "Ò", "Ô", "Ö", "Ő", "Œ", "Ø", "Õ", "Ō"
     ],
     "u": [
-        "&#250", "&#249", "&#251", "&#252", "&#363"
+        "ú", "ù", "û", "ŭ", "ü", "ű", "ū" 
     ],
     "U": [
-        "&#218", "&Ugrave", "&#219", "&#220", "&#362"
+        "Ú", "Ù", "Û", "Ŭ", "Ü", "Ű", "Ū" 
     ],
     "s": [
-        "&szlig", "&#347", "&#353"
+        "ß", "ś", "š", "ŝ"
     ],
     "S": [
-        "&#346", "&#352"
+        "Ś", "Š", "Ŝ"
     ],
     "l": [
-        "&#322"
+        "ł"
     ],
     "L": [
-        "&#321"
+        "Ł"
     ],
     "z": [
-        "&#378", "&#382", "&#380"
+        "ź", "ž", "ż"
     ],
     "Z": [
-        "&#377", "&#381", "&#379"
+        "Ź", "Ž", "Ż"
     ],
     "c": [
-        "&ccedil", "&#263", "&#265"
+        "ç", "ć", "ĉ"
     ],
     "C": [
-        "&Ccedil", "&#262", "&#264"
+        "Ç", "Ć", "Ĉ"
     ],
     "n": [
-        "&#241", "&#324"
+        "ñ", "ń"
     ],
     "N": [
-        "&#209", " &#323"
+        "Ñ", "Ń"
+    ],
+    "g": [
+        "ĝ"
+    ],
+    "G": [
+        "Ĝ"
+    ],
+    "h": [
+        "ĥ"
+    ],
+    "H": [
+        "Ĥ"
+    ],
+    "j": [
+        "ĵ"
+    ],
+    "J": [
+        "Ĵ"
     ],
     "!": [
-        "&#161"
+        "!", "¡"
     ],
     "?": [
-        "&#191"
+        "¿"
     ],
     "\"": [
-        "&laquo", "&raquo"
+        "«", "»"
     ],
     "'": [
-        "&#8249", "&#8250"
+        "‹", "›"
     ]
 }
 
 const HIDE_MODAL_TIMEOUT = 25;
 let modalNumbers = [];
+let modalKeyCodes = [49, 50, 51, 52, 53, 54, 55, 56, 57];
+let currentKeyCodes;
 
 
-function show(letter) {
-    __setup(letter);
+function show(letterSet, isShortcut) {
+    if(isShortcut) {
+        if(letterSet == undefined) {
+            hide(textBox);
+            return;
+        }
+        textToBePasted = letterSet;
+        console.log('textToBePasted', textToBePasted);
+        executeAccent()
+    } else {
+        __setup(letterSet);   
+    }
 }
 
 function __setup(letter) {
@@ -100,77 +130,22 @@ function __setup(letter) {
     modalNumbers.push(iterator + 1);
     });
 
+    currentKeyCodes = modalKeyCodes.slice(0, letter.length);
+    console.log('modalKeyCodes: ', currentKeyCodes);
+
     let element =
         `<div class="modal-popupAccents" id="modal-popupAccents">
         ${columns}
     </div>\n`;
 
-    activeElem = document.activeElement;
     $("body").append(element);
+    modalPoppedUp = true;
 }
 
-function hide(activeElem) {
+function hide(ae) {
     modalPoppedUp = false;
     $('.modal-popupAccents').remove();
 
-    console.log('hiding: ', activeElem);
     // change focus back to textbox
-    activeElem.focus();
+    ae.focus();
 }
-
-
-$(window).on('keydown', async (event) => {
-
-    // if it is a valid number
-    if (modalNumbers.indexOf(parseInt(event.key)) > -1 && modalPoppedUp) {
-        console.log('activeElement: ', activeElem);
-        event.preventDefault();
-
-        let id = String.fromCharCode(event.which);
-        let button = document.getElementById(id);
-        getText(button);
-
-        executeAccent();
-
-        $("#" + id).css("background-color", "#e4f1ff");
-
-        $(".columnAccents").unbind("click");
-        $(activeelement).unbind("click keydown");
-        $(window).unbind("resize mousedown blur contextmenu");
-
-        // removes the modal and reverts the color change
-        setTimeout(() => {
-            $(".modal-popupAccents").remove();
-            $("#" + id).css("background-color", "transparent");
-
-            hide(activeElem);
-        }, HIDE_MODAL_TIMEOUT);
-    }
-});
-
-// clicking a button
-$('.buttonClassAccents').one('click', event => {
-    if(modalPoppedUp) {
-        console.log(event);
-
-        let element = $(event.currentTarget);
-    
-        getText(element);
-    
-        // executes the placement of the character
-        executeAccent();
-    
-        // unbinds the possible events
-        $(".columnAccents").unbind("click");
-        $(activeelement).unbind("click keydown");
-        $(window).unbind("resize click blur contextmenu");
-    
-        // removes the modal and reverts the color change 
-        // from the :active selector on the button clicked
-        setTimeout(() => {
-            $(".modal-popupAccents").remove();
-    
-            hide(activeElem);
-        }, HIDE_MODAL_TIMEOUT);
-    }
-});

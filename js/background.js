@@ -38,7 +38,8 @@ chrome.browserAction.onClicked.addListener(
     function executeScripts(tabs) {
         // FIGURE OUT HOW TO DO THIS
         // chrome.extension.onUpdated.removeListener(executeScripts());
-        let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/placechar.js', 'js/modal.js', 'js/events.js'];
+        console.log('starting Accents extention');
+        let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/modal.js', 'js/events.js', 'js/placechar.js'];
 
         // add jquery
         chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" });

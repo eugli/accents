@@ -1,6 +1,7 @@
 async function executeAccent() {
   // stores where the character will be placed (the caret position)
-  var selectionEnd = lastFocus.selectionEnd;
+  var selectionEnd = textBox.selectionEnd;
+  console.log('execute accent called');
 
   // logs the character to be placed
   // console.log("character to be placed: " + textToBePasted);
@@ -8,31 +9,31 @@ async function executeAccent() {
   // copies the character to the clipboard
   await copyToClipboard(textToBePasted);
 
-  // ensures focus on the text box
-  lastFocus.focus();
-
   // places the character at the caret position
-  await insertAtCursor(lastFocus, textToBePasted)
+  await insertAtCursor(textBox, textToBePasted)
 
   // removes the character typed from generating the modal
-  await $(activeelement).val(
+  await $(textBox).val(
               function(index, value){
               return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
-          })
+          });
   
   // alternative to insertAtCursor but only places the character at the end of the text box
   // await document.execCommand("paste");
 
   // resets the original caret position from before the character placement
-  await setCaretPosition(lastFocus, selectionEnd);
+  await setCaretPosition(textBox, selectionEnd);
 
   // recopies pre-modal clipboard data to preserve it
   await copyToClipboard(clipboardSaved);
+
+
+  // ensures focus on the text box
+  textBox.focus();
 }
 
 // works through the magic of Stack Overflow, don't ask how
 function copyToClipboard(textToBePasted) {
-  console.log('copyToClipboard: ', textToBePasted);
   const el = document.createElement("textarea"); 
   el.value = textToBePasted;                                 
   el.setAttribute("readonly", "");                
@@ -55,12 +56,23 @@ function copyToClipboard(textToBePasted) {
   }   
 }
 
-function getText(element) {
-  let letter = $(element).find(".topAccents").text();
-  let number = $(element).find(".bottomAccents").text();
+function getText(element, ltr, textBox) {
+  // console.log('params: ', element, ltr);
+  // if(typeof ltr == 'number') {
+  //   textToBePasted = element[ltr - 1];
+  //   console.log('text to be yeeted: ', textToBePasted, textBox)
+  //   executeAccent(textBox);
 
-  // stores the character as the text to be pasted
-  textToBePasted = letter;
+  //   $(".columnAccents").unbind("click");
+  //   $(activeelement).unbind("click keydown");
+  //   $(window).unbind("resize mousedown blur contextmenu");
+  // } else {
+    let letter = $(element).find(".topAccents").text();
+    // let number = $(element).find(".bottomAccents").text();
+  
+    // stores the character as the text to be pasted
+    textToBePasted = letter;
+  // }
 }
 
 // inserts the text to the desired caret position
