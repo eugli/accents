@@ -111,7 +111,7 @@ function show(letterSet, isShortcut) {
         }
         
         textToBePasted = letterSet;
-        executeAccent();
+        executeAccent(textToBePasted);
     } 
     
     // if not, sets up the modal
@@ -153,6 +153,104 @@ function setupModal(letter) {
 
     // stores that the modal has been popped up
     modalPoppedUp = true;
+}
+
+// styles the modal for better positioning
+function styleModal(top, left, fontSize, key) {
+    // positions the modal for certain keys better
+    if (key == "l" || key == "j" || key == "i" || key == "'") {
+        left += parseInt(fontSize, 10) / 5;
+    }
+
+    if (key == '"') {
+        left += parseInt(fontSize, 10) / 10;
+    }
+
+    if (key == "g") {
+        $(".bottomAccents").css({
+            "margin-top": "-16px"
+        });
+    }
+
+    // resets regex index
+    // shifts characters down slightly for capital letters
+    // makes a larger modal
+    shiftDown.lastIndex = 0;
+    if (shiftDown.test(key)) {
+        $(".topAccents").css({
+            "margin-top": "5.25px"
+        });
+        
+        $(".buttonClassAccents").css({
+            "height": "58px"
+        });
+
+        $(".modal-popupAccents").css({
+            "height": "67px",
+        });
+
+        $(".modal-popupAccents").toggleClass("changed");
+        $(".topAccents").toggleClass("changed");
+
+        $(".bottomAccents").css({
+            "margin-top": "-19px"
+        });
+    }
+
+    // resets regex index
+    // shifts characters up slightly for guillemets
+    shiftUp.lastIndex = 0;
+    if (shiftUp.test(key)) {
+        $(".topAccents").css({
+            "margin-top": "-2px"
+        });
+
+        $(".bottomAccents").css({
+            "margin-top": "-16px"
+        });
+    }
+
+    // resets regex index
+    // shifts characters up a lot for inverted exclamation and question mark
+    shiftUpALot.lastIndex = 0;
+    if (shiftUpALot.test(key)) {
+        $(".topAccents").css({
+            "margin-top": "-3.5px"
+        });
+
+        $(".bottomAccents").css({
+            "margin-top": "-12px"
+        });
+    }
+
+    // sets the modal coordinates
+    // flips the modal and places it beneath the text if the position would otherwise be off-screen
+    if (parseInt(top, 10) - $(window).scrollTop() < -5) {
+        shiftDown.lastIndex = 0;
+        
+        if (shiftDown.test(key)) {
+            $(".modal-popupAccents").toggleClass("changedFlipped");
+            $(".modal-popupAccents").css({
+                "left": left,
+                "top": parseInt(top, 10) + parseInt(fontSize, 10) +  87.5 +  "px"
+            });
+        }
+
+        else {
+            $(".modal-popupAccents").toggleClass("flipped");
+            $(".modal-popupAccents").css({
+                "left": parseInt(left, 10) + 1 + "px",
+                "top": parseInt(top, 10) + parseInt(fontSize, 10) +  87.5 +  "px"
+            });
+        }
+    }
+
+    else {
+        $("#modal-popupAccents").css({
+            "left": left,
+            "top": top
+        });
+    }
 }
 
 // deletes the modal

@@ -1,27 +1,45 @@
-async function executeAccent() {
-  // stores where the character will be placed (the caret position)
-  var selectionEnd = textBox.selectionEnd;
+async function executeAccent(textToBePasted) {
+  if (textBox.isContentEditable) {
+    // copies the character to the clipboard
+    await copyToClipboard(textToBePasted);
 
-  // copies the character to the clipboard
-  await copyToClipboard(textToBePasted);
+    var text = textBox.innerText;
+    if (text[text.length - 1] === "\n") {
+        text = text.slice(0, -1);
+    }
 
-  // places the character at the caret position
-  await insertAtCursor(textBox, textToBePasted)
+    // places the character at the caret position
+    await document.execCommand("paste");
 
-  // removes the character typed from generating the modal
-  await $(textBox).val(
-              function(index, value){
-              return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
-          });
+    // recopies pre-modal clipboard data to preserve it
+    await copyToClipboard(clipboardSaved);
+  }
 
-  // resets the original caret position from before the character placement
-  await setCaretPosition(textBox, selectionEnd);
+  else {
+    // stores where the character will be placed (the caret position)
+    var selectionEnd = textBox.selectionEnd;
 
-  // recopies pre-modal clipboard data to preserve it
-  await copyToClipboard(clipboardSaved);
+    // copies the character to the clipboard
+    await copyToClipboard(textToBePasted);
 
-  // ensures focus on the text box
-  textBox.focus();
+    // places the character at the caret position
+    await insertAtCursor(textBox, textToBePasted)
+
+    // removes the character typed from generating the modal
+    await $(textBox).val(
+                function(index, value){
+                return value.substr(0, selectionEnd - 1) + value.substr(selectionEnd);
+            });
+
+    // resets the original caret position from before the character placement
+    await setCaretPosition(textBox, selectionEnd);
+
+    // recopies pre-modal clipboard data to preserve it
+    await copyToClipboard(clipboardSaved);
+
+    // ensures focus on the text box
+    textBox.focus();
+  }
 }
 
 // copies the text to the clipboard
@@ -53,8 +71,7 @@ function getText(element) {
   let letter = $(element).find(".topAccents").text();
   let number = $(element).find(".bottomAccents").text();
 
-  // stores the character as the text to be pasted
-  textToBePasted = letter;
+  return letter;
 }
 
 // inserts the text to the desired caret position

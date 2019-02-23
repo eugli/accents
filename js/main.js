@@ -30,7 +30,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // stores the allowed elements for the modal
-const inputs = ["input", "select", "button", "textarea"];
+const inputs = ["input", "select", "button", "textarea", "div"];
 
 // stores the pre-modal clipboard data
 var clipboardSaved;

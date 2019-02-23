@@ -44,8 +44,16 @@ $(window).on("keydown", event => {
 
         handleEvents();
 
-        // gets the caret position
-        getKeyPosition(event.key);
+        if (textBox.isContentEditable) {
+          // gets the caret position for contenteditable
+          console.log("content editables")
+          getKeyPositionContentEditable(textBox, event.key);
+        }
+
+        else {
+          // gets the caret position
+          getKeyPosition(event.key);
+        }
       }
     }
   }
@@ -72,10 +80,9 @@ $(window).on("keydown", event => {
       // gets the text to be pasted from the activated button 
       var id = String.fromCharCode(event.which);
       let button = document.getElementById(id);
-      getText(button);
-  
+
       // executes the placement of the character
-      executeAccent();
+      executeAccent(getText(button));
   
       // changes button background color
       $("#" + id).css("background-color", "#e4f1ff");
@@ -105,33 +112,50 @@ $(window).on("keydown", event => {
 // unbinds the possible events
 function unbindEvents() {
       $(".columnAccents").unbind("click");
-      $(textBox).unbind("click keydown");
-      $(window).unbind("resize click blur contextmenu");
-  
+      $(window).unbind("resize blur scroll contextmenu");
 }
 
 function handleEvents() {
     // placing accent when clicking a button
     $(".columnAccents").one("click", e => {
-      if (modalPoppedUp) {
-          // helps with preventing the click from doing other things (I think)
-          e.preventDefault();
-          e.stopPropagation();
+      unbindEvents();
 
-          getText(this);
-          console.log(textToBePasted)
+      // helps with preventing the click from doing other things (I think)
+      e.preventDefault();
+      e.stopPropagation();
 
-          // executes the placement of the character
-          executeAccent();
+      let textToBePasted = getText(e.currentTarget);
 
-          unbindEvents();
+      // executes the placement of the character
+      executeAccent(textToBePasted);
 
-          // hides the modal
-          setTimeout(() => {
-              hide(textBox);
-          }, HIDE_MODAL_TIMEOUT);
-      }
+      // hides the modal
+      setTimeout(() => {
+        hide(textBox);
+      }, HIDE_MODAL_TIMEOUT);
     });
+
+    // handles a resize, blur, or right click (contxt menu) on the window by removing the modal without executing the character
+    $(window).one("resize blur scroll contextmenu", e => {
+      unbindEvents();
+
+      // hides the modal
+      setTimeout(() => {
+        hide(textBox);
+      }, HIDE_MODAL_TIMEOUT);
+    });
+
+  // handles a mouse down action by removing the modal without executing the character
+  // separate to preserve the click action for the modal, but the mouse down action for anywhere else
+  $(window).one("click", function(e) {
+    // if the target is not the modal
+        unbindEvents();
+
+      // hides the modal
+      setTimeout(() => {
+        hide(textBox);
+      }, HIDE_MODAL_TIMEOUT);
+  });
 }
 
 // GOOGLE DOCS

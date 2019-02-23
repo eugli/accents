@@ -60,7 +60,7 @@ const shiftDown = /([AEIOUSZNCHhGJS])/g
 const shiftUpALot = /([?!])/g
 const shiftUp = /(["'])/g
 // stores the allowed elements for the modal
-const inputs = ["input", "select", "button", "textarea"];
+const inputs = ["input", "select", "button", "textarea", "div"];
 
 // stores whether the text box is contenteditable
 var contentEditable = false;
