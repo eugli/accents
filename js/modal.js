@@ -141,7 +141,6 @@ function setupModal(letter) {
     });
 
     currentKeyCodes = modalKeyCodes.slice(0, letter.length);
-    console.log('modalKeyCodes: ', currentKeyCodes);
 
     let element = 
     `<div class="modal-popupAccents" id="modal-popupAccents" style:">

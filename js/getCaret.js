@@ -107,7 +107,7 @@ function getKeyPosition(key) {
             - 90;
     let left = $(':focus').offset().left
             + coordinates.left
-            - 38.5
+            - 37.5
             - parseInt(fontSize, 10) / 3;
 
     // styles the modal appropriately (shifts up/down depending character pressed, flips modal if needed)
