@@ -1,5 +1,4 @@
 // stores all the accented characters and foreign symbols
-
 const accentLetters = {
     "a": [
         "á", "à", "â", "ä", "æ", "å", "ã", "ā"

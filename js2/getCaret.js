@@ -33,18 +33,11 @@ const properties = [
     "wordSpacing"
 ];
 
-// stores the characters for shifting modal positions
-const shiftDown = /([AEIOUSZNCHhGJS])/g
-const shiftUpALot = /([?!])/g
-const shiftUp = /(["'])/g
-
-// stores the font size for modal position calculations
-var fontSize;
-
 // takes the focused element (the text box) and the index of the caret
 // styles a mirror div with all of the same properties as the text box
 // does some math
 // returns the coordinates of the caret
+// works through the magic of Stack Overflow, don't ask how
 function getCaret(element, position) {
     // creates the mirror div
     let mirrorDiv = document.getElementById(element.nodeName + "--mirror-div");
@@ -95,13 +88,15 @@ function getCaret(element, position) {
     return coordinates;
 }
 
-// finalizes the calculations for the moda
-function getKeyPosition(key) {
+// finalizes the calculations for the modal 1
+// styles the modal appropriately (shifts up/down depending character pressed, flips modal if needed) 2
+function getKeyPosition() {
     activeelement = document.activeElement;
 
     let coordinates = getCaret(activeelement, activeelement.selectionEnd);
     let fontSize = getComputedStyle(activeelement).getPropertyValue("font-size");
 
+    // 1
     let top = $(':focus').offset().top 
             + coordinates.top 
             - 90;
@@ -110,11 +105,18 @@ function getKeyPosition(key) {
             - 38.5
             - parseInt(fontSize, 10) / 3;
 
-    // styles the modal appropriately (shifts up/down depending character pressed, flips modal if needed)
-    styleModal(top, left, fontSize, key);
+    // 2
+    styleModal(top, left, fontSize);
 }
 
-// finalizes the calculations for the modal in contenteditable 
+// GOOGLE DOCS STUFF
+// if ($('.kix-cursor.docs-ui-unprintable') != null) {
+//     // this is google docs
+//     activeelement = $('.kix-cursor.docs-ui-unprintable');
+// }
+
+// finalizes the calculations for the modal in contenteditable 1
+// styles the modal appropriately (shifts up/down depending character pressed, flips modal if needed) 2
 function getKeyPositionContentEditable() {
     activeelement = document.activeElement;
 
@@ -123,6 +125,7 @@ function getKeyPositionContentEditable() {
 
     console.log(coordinatesContent.top, coordinatesContent.left);
 
+    // 1
     let top = 
         + coordinatesContent.top 
         - 90;
@@ -131,11 +134,12 @@ function getKeyPositionContentEditable() {
         - 38.5
     - parseInt(fontSize, 10) / 3;
 
-    // styles the modal appropriately (shifts up/down depending character pressed, flips modal if needed)
+    // 2
     styleModal(top, left, fontSize);
 }
 
 // return the coordinates of the carets
+// don't even think about asking how this works, Stack Overflow
 function getSelectionCoords(win) {
     win = win || window;
     var doc = win.document;
@@ -187,7 +191,7 @@ function getSelectionCoords(win) {
 }
 
 // styles the modal for better positioning
-function styleModal(top, left, fontSize, key) {
+function styleModal(top, left, fontSize) {
     // positions the modal for certain keys better
     if (key == "l" || key == "j" || key == "i" || key == "'") {
         left += parseInt(fontSize, 10) / 5;

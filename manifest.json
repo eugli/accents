@@ -1,16 +1,34 @@
 {
     "manifest_version": 2,
 
-    "name": "Accents",
+    "name": "Accents: Spanish, French, German, and More!",
     "author": "Eugene Li and Gaetan Almela",
     "description": "Emulates the new accent system from macOS.",
-    "version": "1.0.2",
+    "version": "1.0.8",
     "icons": {
         "16": "images/16.png" ,
         "48": "images/48.png",       
         "128": "images/128.png"
     },
 
+    "content_scripts": [{
+        "matches": [
+            "<all_urls>"
+        ],
+        "css": [
+            "css/style.css"
+        ],
+        "js": [
+            "js/jquery-3.3.1.min.js",
+            "js/main.js",
+            "js/getCaret.js",
+            "js/modal.js",
+            "js/events.js",
+            "js/placechar.js"
+        ],
+        "run_at": "document_end",
+        "persistent": false
+    }],
     "background": {
         "page": "background.html",
         "persistent": false
@@ -22,7 +40,6 @@
 
     "permissions": [
         "activeTab",
-        "tabs", 
         "clipboardRead", 
         "clipboardWrite"
     ]

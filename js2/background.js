@@ -13,7 +13,6 @@ function getContentFromClipboard() {
 }
 
 function sendPasteToContentScript(toBePasted) {
-    console.log('text to be pasted: ', toBePasted);
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(
             tabs[0].id,
@@ -35,16 +34,17 @@ function copyListener(tabId, changeInfo, tab) {
 // // launches the content scripts
 // chrome.browserAction.onClicked.addListener(
 //     function executeScripts(tabs) {
-//         let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/modal.js', 'js/events.js', 'js/placechar.js'];
+//         // FIGURE OUT HOW TO DO THIS
+//         // chrome.extension.onUpdated.removeListener(executeScripts());
 
-//         // adds jquery
-//         chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" });
-
-//         // adds all other scripts
-//         scripts.forEach(script => {
-//             chrome.tabs.executeScript(tabs[0], { file: script });
+//         chrome.tabs.insertCSS(tabs[0], { file: "css/style.css" }, function() {
+//             chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" }, function() {
+//                 chrome.tabs.executeScript(tabs[0], { file: "js/accentLetters.js" }, function() {
+//                     chrome.tabs.executeScript(tabs[0], { file: "js/main.js" }, function() {
+//                         chrome.tabs.executeScript(tabs[0], { file: "js/getCaret.js" })
+//                     });
+//                 });
+//             });
 //         });
-
-//         chrome.tabs.insertCSS(tabs[0], { file: "css/style.css" });
 //     }
 // );

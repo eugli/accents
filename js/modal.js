@@ -1,3 +1,4 @@
+// stores all the accented characters and foreign symbols
 const accentLetters = {
     "a": [
         "á", "à", "â", "ä", "æ", "å", "ã", "ā"
@@ -92,60 +93,73 @@ const accentLetters = {
 }
 
 const HIDE_MODAL_TIMEOUT = 25;
+const modalKeyCodes = [49, 50, 51, 52, 53, 54, 55, 56, 57];
+
+// stores the possible numbers you can press
 let modalNumbers = [];
-let modalKeyCodes = [49, 50, 51, 52, 53, 54, 55, 56, 57];
+
+// stores a truncated modalKeyCodes that represents the possilbe numbers you can press
 let currentKeyCodes;
 
-
+// takes in the array of possible accents (if !shortcut) / the single character to be pasted (if shortcut)
 function show(letterSet, isShortcut) {
-    if(isShortcut) {
-        if(letterSet == undefined) {
+    // if shortcut, executes the accent
+    if (isShortcut) {
+        if (letterSet == undefined) {
             hide(textBox);
             return;
         }
+        
         textToBePasted = letterSet;
-        console.log('textToBePasted', textToBePasted);
-        executeAccent()
-    } else {
-        __setup(letterSet);   
+        executeAccent();
+    } 
+    
+    // if not, sets up the modal
+    else {
+        setupModal(letterSet);   
     }
 }
 
-function __setup(letter) {
-    let columns = '';
+// injects the HTML into the web page to generate the modal with the given JSON object
+function setupModal(letter) {
+    let columns = "";
 
     letter.forEach((element, iterator) => {
-
+        // creates the new modal HTML
         columns +=
-            `<div class="columnAccents">
-        <button class="buttonClassAccents" type="button" id=${iterator + 1} >
-            <span class="spanSpecialAccents">
-                <h3 class="topAccents">${element}</h3>
-                <h2 class="bottomAccents">${iterator + 1}</h2>
-            </span>
-        </button>
-    </div>\n`;
+        `<div class="columnAccents">
+            <button class="buttonClassAccents" type="button" id=${iterator + 1}>
+                <span class="spanSpecialAccents">
+                    <h3 class="topAccents">${element}</h3>
+                    <h2 class="bottomAccents">${iterator + 1}</h2>
+                </span>
+            </button>
+        </div>\n`;
 
-    // stores the numbers that can be pressed on the modal
-    modalNumbers.push(iterator + 1);
+        // stores the numbers that can be pressed on the modal
+        modalNumbers.push(iterator + 1);
     });
 
     currentKeyCodes = modalKeyCodes.slice(0, letter.length);
     console.log('modalKeyCodes: ', currentKeyCodes);
 
-    let element =
-        `<div class="modal-popupAccents" id="modal-popupAccents">
+    let element = 
+    `<div class="modal-popupAccents" id="modal-popupAccents" style:">
         ${columns}
     </div>\n`;
 
+    // appends the HTML
     $("body").append(element);
+
+    // stores that the modal has been popped up
     modalPoppedUp = true;
 }
 
+// deletes the modal
 function hide(ae) {
     modalPoppedUp = false;
     $('.modal-popupAccents').remove();
 
-    // change focus back to textbox
+    // changes focus back to textbox
     ae.focus();
 }

@@ -11,10 +11,11 @@
     position: relative !important;
 
     display: block !important;
+    padding: 0px 0px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-bottom: 1em !important;
-    margin-top: 1.5px !important;
+    margin-top: 1.5px;
 
     color: #007CD3 !important;
 
@@ -22,32 +23,34 @@
     font-size: 24px !important;
     font-weight: 500 !important;
     line-height: normal !important;
+    text-transform: none !important;
 }
 
 .bottomAccents  {
     position: relative !important;
 
     display: block !important;
+    padding: 0px 0px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-bottom: 0.83em !important;
-    margin-top: -18px !important;
+    margin-top: -18px;
 
-    color: #cccccc;
+    color: #cccccc !important;
 
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; 
     font-size: 16px !important;
     font-weight: 500 !important;
     line-height: normal !important;
+    text-transform: none !important;
 }
 
 .buttonClassAccents { 
-    z-index: 2147483647 !important; 
+    z-index: 2147483647 !important;
 
     display: flex !important;
-    box-sizing: border-box !important;
     width: 34.5px !important;
-    height: 56px !important;
+    height: 56px;
     min-width: 0 !important;
     min-height: 0 !important;
     padding: 0px 3px !important;
@@ -60,7 +63,7 @@
 
     text-transform: none !important;
     text-decoration: none !important;
-    line-height: 1 !important;
+    line-height: 1;
     -webkit-appearance: none !important;
 
     cursor: pointer !important;
@@ -87,9 +90,9 @@
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
-    box-sizing: content-box !important;
-    height: 62.5px !important;
-    padding: 0px 4px !important;
+    box-sizing: border-box !important;
+    height: 65.5px;
+    padding: 0px 4px;
     border: #c1d6ff solid 1.5px !important;
     border-radius: 7px !important;
     margin: 15px !important;
@@ -99,16 +102,16 @@
 
 .modal-popupAccents:after {
     position: absolute !important;
-    top: 58.5px !important;
+    top: 58.5px;
     z-index: -1 !important;
 
     display: block !important;
     box-sizing: border-box !important;
-    width: 10.5px !important;
-    height: 10.5px !important;
-    border-right: 1.5px solid #c1d6ff !important;
-    border-bottom: 1.5px solid #c1d6ff !important;
-    margin-left: 13px !important;
+    width: 10.5px;
+    height: 10.5px;
+    border-right: 1.5px solid #c1d6ff;
+    border-bottom: 1.5px solid #c1d6ff;
+    margin-left: 13px;
 
     background: white !important;
 
@@ -120,17 +123,17 @@
 
 .modal-popupAccents.changed:after {
     position: absolute !important;
-    top: 62px !important;
+    top: 62px;
     z-index: -1 !important;
 
     display: block !important;
     box-sizing: border-box !important;
-    width: 10.5px !important;
-    height: 10.5px !important;
-    border-right: 1.5px solid #c1d6ff !important;
-    border-bottom: 1.5px solid #c1d6ff !important;
-    margin-left: 13px !important;
-    margin-top: -2px !important;
+    width: 10.5px;
+    height: 10.5px;
+    border-right: 1.5px solid #c1d6ff;
+    border-bottom: 1.5px solid #c1d6ff;
+    margin-left: 13px;
+    margin-top: -2px;
 
     background: white !important;
 
@@ -142,19 +145,19 @@
 
 .modal-popupAccents.flipped:after {
     position: absolute !important;
-    top: -5.2px !important;
-    z-index: -1 !important;
+    top: -5.2px;
+    z-index: -1 !important; 
 
     display: block !important;
     box-sizing: border-box !important;
-    width: 10.5px !important;
-    height: 10.5px !important;
-    border-left: 1.5px solid #c1d6ff !important;
-    border-right: 1.5px solid white !important;
-    border-bottom: 1.5px solid white !important;
-    border-top: 1.5px solid #c1d6ff !important;
-    margin-left: 13px !important;
-    margin-bottom: 20px !important;
+    width: 10.5px;
+    height: 10.5px;
+    border-left: 1.5px solid #c1d6ff;
+    border-right: 1.5px solid white;
+    border-bottom: 1.5px solid white;
+    border-top: 1.5px solid #c1d6ff;
+    margin-left: 12.5px;
+    margin-bottom: 20px;
 
     background: white !important;
 
@@ -166,19 +169,19 @@
 
 .modal-popupAccents.changedFlipped:after {
     position: absolute !important;
-    top: -3.2px !important;
+    top: -3.2px;
     z-index: -1 !important;
 
     display: block !important;
     box-sizing: border-box !important;
-    width: 10.5px !important;
-    height: 10.5px !important;
-    border-left: 1.5px solid #c1d6ff !important;
-    border-right: 1.5px solid white !important;
-    border-bottom: 1.5px solid white !important;
-    border-top: 1.5px solid #c1d6ff !important;
-    margin-left: 13px !important;
-    margin-bottom: 20px !important;
+    width: 10.5px;
+    height: 10.5px;
+    border-left: 1.5px solid #c1d6ff;
+    border-right: 1.5px solid white;
+    border-bottom: 1.5px solid white;
+    border-top: 1.5px solid #c1d6ff;
+    margin-left: 12.5px;
+    margin-bottom: 20px;
 
     background: white !important;
 
