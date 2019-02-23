@@ -35,7 +35,7 @@ function copyListener(tabId, changeInfo, tab) {
 // // launches the content scripts
 // chrome.browserAction.onClicked.addListener(
 //     function executeScripts(tabs) {
-//         let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/modal.js', 'js/events.js', 'js/placechar.js'];
+//         let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/modal.js', 'js/events.js', 'js/placeChar.js'];
 
 //         // adds jquery
 //         chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" });

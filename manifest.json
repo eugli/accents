@@ -24,7 +24,7 @@
             "js/getCaret.js",
             "js/modal.js",
             "js/events.js",
-            "js/placechar.js"
+            "js/placeChar.js"
         ],
         "run_at": "document_end",
         "persistent": false

@@ -116,7 +116,8 @@ function show(letterSet, isShortcut) {
     
     // if not, sets up the modal
     else {
-        setupModal(letterSet);   
+        setupModal(letterSet);  
+        console.log("modal") 
     }
 }
 
@@ -227,6 +228,7 @@ function styleModal(top, left, fontSize, key) {
     if (parseInt(top, 10) - $(window).scrollTop() < -5) {
         shiftDown.lastIndex = 0;
         
+        console.log(key)
         if (shiftDown.test(key)) {
             $(".modal-popupAccents").toggleClass("changedFlipped");
             $(".modal-popupAccents").css({
@@ -256,6 +258,9 @@ function styleModal(top, left, fontSize, key) {
 function hide(ae) {
     modalPoppedUp = false;
     $('.modal-popupAccents').remove();
+
+    // unbinds possible events
+    unbindEvents();
 
     // changes focus back to textbox
     ae.focus();

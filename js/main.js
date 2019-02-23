@@ -39,6 +39,5 @@ var clipboardSaved;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.data) {
         clipboardSaved = request.data;
-        // console.log(clipboardSaved);
     }
 });

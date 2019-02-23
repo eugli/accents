@@ -8,11 +8,16 @@ async function executeAccent(textToBePasted) {
         text = text.slice(0, -1);
     }
 
+    await $(textBox).text(text);
+
     // places the character at the caret position
     await document.execCommand("paste");
 
     // recopies pre-modal clipboard data to preserve it
     await copyToClipboard(clipboardSaved);
+
+    // ensures focus on the text box
+    textBox.focus();
   }
 
   else {
@@ -23,7 +28,7 @@ async function executeAccent(textToBePasted) {
     await copyToClipboard(textToBePasted);
 
     // places the character at the caret position
-    await insertAtCursor(textBox, textToBePasted)
+    await insertAtCursor(textBox, textToBePasted);
 
     // removes the character typed from generating the modal
     await $(textBox).val(

@@ -59,7 +59,7 @@
     outline: none !important;
     margin: 0 !important;
     
-    background-color: transparent !important;
+    background-color: transparent;
 
     text-transform: none !important;
     text-decoration: none !important;
@@ -79,7 +79,7 @@
 .buttonClassAccents:active {
     outline: none !important;
     
-    background-color: #e4f1ff !important;
+    background-color: #e4f1ff;
 }
 
 .modal-popupAccents {
