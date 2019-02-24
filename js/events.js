@@ -88,7 +88,7 @@ function launchExtension() {
         textBox.focus();
 
         // changes button background color
-        $("#" + id).css("background-color", "#e4f1ff !important");
+        $("#" + id).css("background-color", "#e4f1ff");
         console.log(id)
       }
 

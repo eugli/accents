@@ -92,7 +92,7 @@ const accentLetters = {
     ]
 }
 
-const HIDE_MODAL_TIMEOUT = 25;
+const HIDE_MODAL_TIMEOUT = 50;
 const modalKeyCodes = [49, 50, 51, 52, 53, 54, 55, 56, 57];
 
 // stores the possible numbers you can press

@@ -79,7 +79,7 @@
 .buttonClassAccents:active {
     outline: none !important;
     
-    background-color: #e4f1ff;
+    background-color: #e4f1ff !important;
 }
 
 .modal-popupAccents {
