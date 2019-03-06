@@ -8,7 +8,9 @@ async function executeAccent(textToBePasted) {
         text = text.slice(0, -1);
     }
 
-    await $(textBox).text(text);
+    // await $(textBox).text(function (_, text) {
+    //   return text.slice(0, -1);
+    // });
 
     // places the character at the caret position
     await document.execCommand("paste");
@@ -124,5 +126,21 @@ function setCaretPosition(elem, caretPos) {
               elem.focus();
           }
       }
+  }
+}
+
+// deletes the old character for content editable text boxes
+function replaceSelectedTextContentEditable(replacementText) {
+  var sel, range;
+  if (window.getSelection) {
+      sel = window.getSelection();
+      if (sel.rangeCount) {
+          range = sel.getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(document.createTextNode(replacementText));
+      }
+  } else if (document.selection && document.selection.createRange) {
+      range = document.selection.createRange();
+      range.text = replacementText;
   }
 }

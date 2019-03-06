@@ -79,10 +79,13 @@ const accentLetters = {
         "Ĵ"
     ],
     "!": [
-        "!", "¡"
+        "¡"
     ],
     "?": [
         "¿"
+    ],
+    "$": [
+        "€", "£"
     ],
     "\"": [
         "«", "»"
@@ -91,6 +94,11 @@ const accentLetters = {
         "‹", "›"
     ]
 }
+
+// stores the characters for shifting modal positions
+const shiftDown = /([AEIOUSZNCHhGJS])/g
+const shiftUpALot = /([?!])/g
+const shiftUp = /(["'])/g
 
 const HIDE_MODAL_TIMEOUT = 50;
 const modalKeyCodes = [49, 50, 51, 52, 53, 54, 55, 56, 57];
@@ -129,7 +137,7 @@ function setupModal(letter) {
         // creates the new modal HTML
         columns +=
         `<div class="columnAccents">
-            <button class="buttonClassAccents" type="button" id=${iterator + 1}>
+            <button class="buttonClassAccents" type="button" id=button${iterator + 1}>
                 <span class="spanSpecialAccents">
                     <h3 class="topAccents">${element}</h3>
                     <h2 class="bottomAccents">${iterator + 1}</h2>
@@ -158,7 +166,7 @@ function setupModal(letter) {
 // styles the modal for better positioning
 function styleModal(top, left, fontSize, key) {
     // positions the modal for certain keys better
-    if (key == "l" || key == "j" || key == "i" || key == "'") {
+    if (key == "l" || key == "j" || key == "i" || key == "'" || key == "!") {
         left += parseInt(fontSize, 10) / 5;
     }
 

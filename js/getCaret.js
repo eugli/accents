@@ -33,11 +33,6 @@ const properties = [
     "wordSpacing"
 ];
 
-// stores the characters for shifting modal positions
-const shiftDown = /([AEIOUSZNCHhGJS])/g
-const shiftUpALot = /([?!])/g
-const shiftUp = /(["'])/g
-
 // stores the font size for modal position calculations
 var fontSize;
 

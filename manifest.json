@@ -1,22 +1,20 @@
 {
     "manifest_version": 2,
 
-    "name": "Accents: Spanish, French, German, and More!",
+    "name": "Accents: Spanish, Portuguese, French, German",
+    "short_name": "Accents",
     "author": "Eugene Li and Gaetan Almela",
-    "description": "Emulates the new accent system from macOS.",
+    "description": "Type accents, symbols, and special characters through a simple popup system. Promote your education, productivity, and diversity.",
     "version": "1.0.8",
     "icons": {
-        "16": "images/16.png" ,
-        "48": "images/48.png",       
-        "128": "images/128.png"
+        "16": "images/icon16Flip.png" ,
+        "48": "images/icon48Flip.png",       
+        "128": "images/icon128Flip.png"
     },
 
     "content_scripts": [{
         "matches": [
             "<all_urls>"
-        ],
-        "css": [
-            "css/style.css"
         ],
         "js": [
             "js/jquery-3.3.1.min.js",
@@ -35,12 +33,15 @@
     },
     "browser_action": {
         "default_title": "Accents",
-        "default_icon": "images/browserAction.png"
+        "default_icon": "images/browserActionFlip.png"
     },
 
     "permissions": [
         "activeTab",
         "clipboardRead", 
         "clipboardWrite"
+    ],
+    "web_accessible_resources": [
+        "css/style.css"
     ]
 }
