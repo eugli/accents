@@ -1,5 +1,10 @@
 # Accents
-Accents is a Chrome extension that emulates the new accent system from macOS.
+<p align="center">
+  <img src="images/smallTile.jpg">
+  <p align="center">
+    Accents is a Chrome extension that emulates the new accent system from macOS.
+  </p>
+</p>
 
 ## Installation
 https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg
