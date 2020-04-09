@@ -8,7 +8,7 @@ Accents is a Chrome extension that emulates the new, simple diacritic system fro
 
 <br/>
 <p align="center">
-  <img width=75% height=75% src="images/banner3cropped.jpg">
+  <img width=70% height=70% src="images/banner3cropped.jpg">
 </p>
 <br/>
 
