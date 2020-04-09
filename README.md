@@ -1,6 +1,6 @@
 <br>
 <p align="center">
-  <img height=80% src="images/smallTile.jpg">
+  <img height=40% width=40% src="images/smallTile.jpg">
 </p>
 <br>
 
@@ -8,7 +8,7 @@ Accents is a Chrome extension that emulates the new, simple diacritic system fro
 
 <br/>
 <p align="center">
-  <img width=75% height=80% src="images/banner3cropped.jpg">
+  <img width=75% height=75% src="images/banner3cropped.jpg">
 </p>
 <br/>
 
