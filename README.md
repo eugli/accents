@@ -4,11 +4,11 @@
 
 Accents is a Chrome extension that emulates the new, simple diacritic system from macOS. Accents allows you to type accents, symbols, and special characters from a wide variety of languages through a simple popup system.
 
-NOTE: This version does not work on Google Docs and Gmail. Download it now, and we will have a fix soon. 
-
 <p align="center">
-  <img height=80% width=80% src="images/banner1.jpg">
+  <img width=80% height=80% src="images/banner3cropped.jpg">
 </p>
+
+NOTE: This version does not work on Google Docs and Gmail. Download it now, and we will have a fix soon. 
 
 ## Installation
 You can download it [here.](https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg)
