@@ -1,10 +1,8 @@
-# Accents
 <p align="center">
   <img src="images/smallTile.jpg">
-  <p align="center">
-    Accents is a Chrome extension that emulates the new, simple diacritic system from macOS.
-  </p>
 </p>
+
+Accents is a Chrome extension that emulates the new, simple diacritic system from macOS.
 
 ## Installation
 You can download it [here.](https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg)
