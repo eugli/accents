@@ -2,7 +2,7 @@
 <p align="center">
   <img src="images/smallTile.jpg">
   <p align="center">
-    <b>Accents</b> is a Chrome extension that emulates the new diacritic system from macOS.
+    Accents is a Chrome extension that emulates the new diacritic system from macOS.
   </p>
 </p>
 
