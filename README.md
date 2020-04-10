@@ -6,7 +6,7 @@
 </p>
 <br>
 
-Accents is a Chrome extension that emulates the new, simple diacritic system from macOS. Accents allows you to type accents, symbols, and special characters from a wide variety of languages through a simple popup system.
+Accents is a Chrome extension that emulates the [diacritic system from macOS](https://support.apple.com/guide/mac-help/enter-characters-with-accent-marks-on-mac-mh27474/mac). Accents allows you to type accents, symbols, and special characters from a wide variety of languages through a simple popup system.
 
 <br/>
 <p align="center">
