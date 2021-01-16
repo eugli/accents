@@ -14,7 +14,7 @@ Accents is a Chrome extension that emulates the [diacritic system from macOS](ht
 </p>
 <br/>
 
-*This version does not work on Google Docs and Gmail. We might have a fix soon.* 
+*This version does not work on Google Docs and Gmail. We might have a fix soon, or not.* 
 
 ## Installation
 You can download it [here.](https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg)
