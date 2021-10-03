@@ -65,7 +65,7 @@ function launchExtension() {
 
           if (textBox.isContentEditable) {
             // gets the caret position for contenteditable
-            console.log("content editables")
+            // console.log("content editables")
             getKeyPositionContentEditable(textBox, event.key);
           }
 
@@ -81,8 +81,8 @@ function launchExtension() {
     // if the previously held down key was a key of interest
     // if the current key is a number
     if (awaitingNumberShortcut && Object.keys(accentLetters).indexOf(prevKeyPressed) > -1 && event.keyCode >= 49 && event.keyCode <= 57 && !modalPoppedUp) {
-      console.log(prevKeyPressed);
-      console.log("" + currentKey)
+      // console.log(prevKeyPressed);
+      // console.log("" + currentKey)
       event.preventDefault();
       textBox = document.activeElement;
 
@@ -101,7 +101,7 @@ function launchExtension() {
         // gets the text to be pasted from the activated button 
         var id = "button" + String.fromCharCode(event.which);
         let button = document.getElementById(id);
-        console.log(button)
+        // console.log(button)
 
         // executes the placement of the character
         executeAccent(getText(button));
@@ -134,10 +134,10 @@ function launchExtension() {
       keyPresses = 0;
     }
 
-    console.log("prevKeyPressed: " + prevKeyPressed);
-    console.log("keyPress: " + keyPresses)
-    console.log("event.key: " + event.key)
-    console.log("awaitingNumberShortcut:" + awaitingNumberShortcut)
+    // console.log("prevKeyPressed: " + prevKeyPressed);
+    // console.log("keyPress: " + keyPresses)
+    // console.log("event.key: " + event.key)
+    // console.log("awaitingNumberShortcut:" + awaitingNumberShortcut)
 
     // if the key has an accent
     // resets the conditions

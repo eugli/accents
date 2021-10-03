@@ -5,7 +5,7 @@
     "short_name": "Accents",
     "author": "Eugene Li and Gaetan Almela",
     "description": "Type accents, symbols, and special characters through a simple popup system. Promote your education, productivity, and diversity.",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "icons": {
         "16": "images/icon16Flip.png" ,
         "48": "images/icon48Flip.png",       

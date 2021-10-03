@@ -15,13 +15,8 @@
 //     "persistent": false
 // }],
 
-// to possibly do later: 
-// customization of keys, w/e characters and emojis desired (low priority)
-// send an email to spanish learning websites asking
-// them to maybe post it on the pages where they explain how to write accents
-
 // to-do:
-// fix position on google classroom comments
+// customization of keys, adding as characters and emojis desired
 // fix contentEditable deletion
 // exclamation mark bug
 

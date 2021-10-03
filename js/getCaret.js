@@ -114,8 +114,8 @@ function getKeyPositionContentEditable(textBox, key) {
     let coordinatesContent = getSelectionCoords(window);
     let fontSize = parseInt(document.queryCommandValue("FontSize"), 10) + 12;
 
-    console.log(fontSize);
-    console.log(coordinatesContent.top, coordinatesContent.left);
+    // console.log(fontSize);
+    // console.log(coordinatesContent.top, coordinatesContent.left);
 
     let top = 
         + coordinatesContent.top 
