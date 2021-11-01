@@ -17,8 +17,8 @@ Accents is a Chrome extension that emulates the [diacritic system from macOS](ht
 *This version does not work on Google Docs and Gmail. We might have a fix soon, or not.* 
 
 ## Installation
-Sorry for the inconvinience, but Accents is not downloadable at the moment. 
-You cannot download it [here.](https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg) Enjoy!
+Apologies for the inconvinience, but Accents is not downloadable at the moment. We are currently reworking the core functionality and will have it back on the store as soon as possible.
+<!---You cannot download it [here.](https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg)-->
 
 ## Usage
 1. Hold down a key when typing and wait for the pop-up to appear. Try it with uppercase letters, punctuation marks, and other symbols too.
