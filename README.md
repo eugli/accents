@@ -19,7 +19,7 @@ Accents is a Chrome extension that emulates the [diacritic system from macOS](ht
 ## Installation
  ~~Thank you for 35k users!~~
 
-Apologies for the inconvinience, but Accents is not downloadable at the moment. We are currently reworking the core functionality and will have it back on the Chrome Store as soon as possible.
+Apologies for the inconvinience, but Accents is not downloadable at the moment. The item was sold and the new owner took it down for unknown reasons.
 <!---You cannot download it [here.](https://chrome.google.com/webstore/detail/accents-spanish-portugues/laiognlohmgkmlfchcclnjnafgeinnpg)-->
 
 ## Usage
