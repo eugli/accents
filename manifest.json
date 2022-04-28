@@ -1,10 +1,9 @@
 {
     "manifest_version": 2,
-
-    "name": "Accents: Spanish, Portuguese, French, German",
+    "name": "Accents: Spanish, French, Portuguese, German",
     "short_name": "Accents",
     "author": "Eugene Li and Gaetan Almela",
-    "description": "Type accents, symbols, and special characters through a simple popup system. Promote your education, productivity, and diversity.",
+    "description": "Type accents, symbols, and special characters through a simple popup system.",
     "version": "1.0.9",
     "icons": {
         "16": "images/icon16Flip.png" ,
@@ -29,7 +28,7 @@
     }],
     "background": {
         "page": "background.html",
-        "persistent": false
+        "persistent": true
     },
     "browser_action": {
         "default_title": "Accents",
