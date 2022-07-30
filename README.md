@@ -10,7 +10,7 @@ Accents is a Chrome extension that emulates the [diacritic system from macOS](ht
 
 <br/>
 <p align="center">
-  <img width=70% height=70% src="images/banner3cropped.jpg">
+  <img width=70% height=70% src="images/banner3.jpg">
 </p>
 <br/>
 
