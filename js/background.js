@@ -30,3 +30,20 @@ function copyListener(tabId, changeInfo, tab) {
         sendPasteToContentScript(clipboardContent);
     }
 }
+
+// // launches the content scripts
+// chrome.browserAction.onClicked.addListener(
+//     function executeScripts(tabs) {
+//         let scripts = ['js/jquery-3.3.1.min.js', 'js/main.js', 'js/getCaret.js', 'js/modal.js', 'js/events.js', 'js/placeChar.js'];
+
+//         // adds jquery
+//         chrome.tabs.executeScript(tabs[0], { file: "js/jquery-3.3.1.min.js" });
+
+//         // adds all other scripts
+//         scripts.forEach(script => {
+//             chrome.tabs.executeScript(tabs[0], { file: script });
+//         });
+
+//         chrome.tabs.insertCSS(tabs[0], { file: "css/style.css" });
+//     }
+// );
